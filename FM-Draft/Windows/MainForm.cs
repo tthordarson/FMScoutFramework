@@ -11,11 +11,11 @@ using FM_Draft.Library;
 
 namespace FM_Draft
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private GameCore game = null;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -61,6 +61,12 @@ namespace FM_Draft
             {
                 principalCountryCombobox.DataSource = game.QueryService.GetNations().ToList();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var dialog = new AddToPoolDialog(game.GameState.DraftPool, game.QueryService);
+            dialog.Show();
         }
 
         //private void tabControl1_TabIndexChanged(object sender, EventArgs e)
