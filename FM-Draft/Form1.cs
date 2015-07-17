@@ -13,11 +13,19 @@ namespace FM_Draft
 {
     public partial class Form1 : Form
     {
-        private GameState game = null;
+        private GameCore game = null;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public bool IsLoaded
+        {
+            get
+            {
+                return game != null && game.IsLoaded;
+            }
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -27,7 +35,7 @@ namespace FM_Draft
 
         private void InitializeGame()
         {
-            game = new GameState();
+            game = new GameCore();
 
             game.LoadFailedCallback += () =>
             {
@@ -46,5 +54,18 @@ namespace FM_Draft
         {
             Close();
         }
+
+        private void confederationTab_Enter(object sender, EventArgs e)
+        {
+            if (IsLoaded)
+            {
+                principalCountryCombobox.DataSource = game.QueryService.GetNations().ToList();
+            }
+        }
+
+        //private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show(tabControl1.SelectedTab.Name);
+        //}
     }
 }

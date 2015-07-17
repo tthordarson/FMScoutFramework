@@ -52,7 +52,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Library\GameState.cs" />
+    <Compile Include="Library\GameCore.cs" />
+    <Compile Include="Library\Entities\GameState.cs" />
+    <Compile Include="Library\QueryService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
