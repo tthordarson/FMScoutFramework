@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM_Draft.Library.DataProjections
+namespace FMDraft.Library.DataProjections
 {
     public class PlayerProjection
     {

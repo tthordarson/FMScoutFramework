@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using FMScoutFramework.Core;
 using FMScoutFramework.Core.Entities;
-using FM_Draft.Library.Entities;
+using FMDraft.Library.Entities;
 
-namespace FM_Draft.Library
+namespace FMDraft.Library
 {
     public class GameCore
     {

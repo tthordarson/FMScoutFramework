@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace FM_Draft.Library
+namespace FMDraft.Library
 {
     public class Configuration
     {

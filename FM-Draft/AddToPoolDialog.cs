@@ -1,7 +1,4 @@
-﻿using FM_Draft.Library;
-using FM_Draft.Library.Entities;
-using FM_Draft.Library.DataProjections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FMDraft.Library;
+using FMDraft.Library.Entities;
+using FMDraft.Library.DataProjections;
 
 namespace FM_Draft
 {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FM_Draft.Library;
+using FMDraft.Library;
 
 namespace FM_Draft
 {
