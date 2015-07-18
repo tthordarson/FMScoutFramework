@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\Configuration.cs" />
+    <Compile Include="Library\DataProjections\PlayerProjection.cs" />
+    <Compile Include="Library\DataProjections\ProjectExtensions.cs" />
     <Compile Include="Library\Entities\DraftPool.cs" />
     <Compile Include="Windows\AddToPoolDialog.cs">
       <SubType>Form</SubType>
@@ -99,7 +101,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\GitHub\FMScoutFramework\FMScoutFramework.csproj">
+    <ProjectReference Include="..\FMScoutFramework\FMScoutFramework.csproj">
       <Project>{e74fe82a-2e12-4c51-ad24-7d2dde5c36a6}</Project>
       <Name>FMScoutFramework</Name>
     </ProjectReference>

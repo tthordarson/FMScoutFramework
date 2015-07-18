@@ -1,5 +1,6 @@
 ﻿using FM_Draft.Library;
 using FM_Draft.Library.Entities;
+using FM_Draft.Library.DataProjections;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,9 +27,10 @@ namespace FM_Draft
 
         private void AddToPoolDialog_Load(object sender, EventArgs e)
         {
-            var iceland = queryService.GetNations().FirstOrDefault(x => x.Name == "Iceland");
-
-            gridView.DataSource = queryService.GetPlayers(x => x.Nationality == iceland);
+            gridView.DataSource = queryService
+                .GetPlayers(x => true)
+                .Select(x => x.AsProjected())
+                .ToList();
         }
     }
 }

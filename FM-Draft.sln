@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FM-Draft", "FM-Draft\FM-Draft.csproj", "{CEE71A01-38DB-42BC-BCFB-8189EB25AB60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMScoutFramework", "..\..\..\GitHub\FMScoutFramework\FMScoutFramework.csproj", "{E74FE82A-2E12-4C51-AD24-7D2DDE5C36A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMScoutFramework", "FMScoutFramework\FMScoutFramework.csproj", "{E74FE82A-2E12-4C51-AD24-7D2DDE5C36A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

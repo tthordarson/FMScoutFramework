@@ -18,6 +18,7 @@ namespace FM_Draft
         public MainForm()
         {
             InitializeComponent();
+            InitializeGame();
         }
 
         public bool IsLoaded
@@ -26,11 +27,6 @@ namespace FM_Draft
             {
                 return game != null && game.IsLoaded;
             }
-        }
-
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitializeGame();
         }
 
         private void InitializeGame()
@@ -46,8 +42,11 @@ namespace FM_Draft
             {
                 MessageBox.Show("Data has been loaded");
             };
+        }
 
-            game.Load();
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.game.Load();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,10 +67,5 @@ namespace FM_Draft
             var dialog = new AddToPoolDialog(game.GameState.DraftPool, game.QueryService);
             dialog.Show();
         }
-
-        //private void tabControl1_TabIndexChanged(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show(tabControl1.SelectedTab.Name);
-        //}
     }
 }
