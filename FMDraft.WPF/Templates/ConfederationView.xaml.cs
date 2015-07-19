@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FMDraft.WPF.Tabs
+namespace FMDraft.WPF.Templates
 {
     /// <summary>
-    /// Interaction logic for ConfederationTabView.xaml
+    /// Interaction logic for ConfederationView.xaml
     /// </summary>
-    public partial class ConfederationTabView : UserControl
+    public partial class ConfederationView : UserControl
     {
-        public ConfederationTabView(GameCore core)
+        public ConfederationView(GameCore core)
         {
             InitializeComponent();
-            this.DataContext = new ConfederationTabViewModel(core);
+            this.DataContext = new ConfederationViewModel(core);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FMDraft.Library.Entities
 {
     public class DraftPool
     {
-        public IEnumerable<Player> AvailablePlayers { get; set; }
+        public IList<Player> AvailablePlayers { get; set; }
 
         public DraftPool()
         {

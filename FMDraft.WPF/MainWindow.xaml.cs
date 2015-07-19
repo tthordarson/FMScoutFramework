@@ -1,5 +1,5 @@
 ﻿using FMDraft.Library;
-using FMDraft.WPF.Tabs;
+using FMDraft.WPF.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +66,12 @@ namespace FMDraft.WPF
 
         private void ConfederationTab_Selected(object sender, RoutedEventArgs e)
         {
-            ConfederationTab.Content = new ConfederationTabView(game);
+            ConfederationTab.Content = new ConfederationView(game);
+        }
+
+        private void DraftPoolTab_Selected(object sender, RoutedEventArgs e)
+        {
+            DraftPoolTab.Content = new DraftPoolView(game);
         }
     }
 }
