@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FMDraft.Library.DataProjections
+namespace FMDraft.Library
 {
-    public class PlayerProjection
+    public class Player
     {
-        public Player Object { get; set; }
         public string FullName { get; set; }
         public string Club { get; set; }
         public string League { get; set; }
@@ -17,6 +16,5 @@ namespace FMDraft.Library.DataProjections
         public ushort PotentialAbility { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Age { get; set; }
-        //public string Nationality { get; set; }
     }
 }

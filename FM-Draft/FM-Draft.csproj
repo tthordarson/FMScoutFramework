@@ -94,10 +94,6 @@
       <Project>{83edcb99-b0d9-4a38-a9e7-2c81c379b440}</Project>
       <Name>FMDraft.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FMScoutFramework\FMScoutFramework.csproj">
-      <Project>{e74fe82a-2e12-4c51-ad24-7d2dde5c36a6}</Project>
-      <Name>FMScoutFramework</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

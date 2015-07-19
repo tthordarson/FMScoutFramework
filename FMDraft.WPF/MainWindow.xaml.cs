@@ -1,4 +1,5 @@
 ﻿using FMDraft.Library;
+using FMDraft.WPF.Tabs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,7 @@ namespace FMDraft.WPF
         private void New_Click(object sender, RoutedEventArgs e)
         {
             game.Load();
+            
         }
 
         private void Quit_Click(object sender, RoutedEventArgs e)
@@ -64,10 +66,7 @@ namespace FMDraft.WPF
 
         private void ConfederationTab_Selected(object sender, RoutedEventArgs e)
         {
-            if (IsGameLoaded)
-            {
-                PrincipalNationsComboBox.ItemsSource = game.QueryService.GetNations();
-            }
+            ConfederationTab.Content = new ConfederationTabView(game);
         }
     }
 }

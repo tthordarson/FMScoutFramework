@@ -55,7 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Tabs\ConfederationTabView.xaml.cs">
+      <DependentUpon>ConfederationTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\ConfederationTabViewModel.cs" />
+    <Compile Include="ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +72,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Tabs\ConfederationTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -101,11 +109,8 @@
       <Project>{83edcb99-b0d9-4a38-a9e7-2c81c379b440}</Project>
       <Name>FMDraft.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FMScoutFramework\FMScoutFramework.csproj">
-      <Project>{e74fe82a-2e12-4c51-ad24-7d2dde5c36a6}</Project>
-      <Name>FMScoutFramework</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

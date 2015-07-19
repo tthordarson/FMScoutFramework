@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FMDraft.WPF.ViewModels
+namespace FMDraft.Library.Entities
 {
-    public class MainViewModel
+    public class Nation
     {
+        public string Name { get; set; }
     }
 }

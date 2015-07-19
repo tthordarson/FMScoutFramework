@@ -42,12 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
-    <Compile Include="DataProjections\PlayerProjection.cs" />
-    <Compile Include="DataProjections\ProjectExtensions.cs" />
+    <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\DraftCard.cs" />
     <Compile Include="Entities\DraftPool.cs" />
     <Compile Include="Entities\GameState.cs" />
     <Compile Include="Entities\League.cs" />
+    <Compile Include="Entities\Nation.cs" />
     <Compile Include="Entities\Stadium.cs" />
     <Compile Include="Entities\Team.cs" />
     <Compile Include="GameCore.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="QueryService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FMScoutFramework\FMScoutFramework.csproj">
+    <ProjectReference Include="..\..\..\..\GitHub\FMScoutFramework\FMScoutFramework.csproj">
       <Project>{e74fe82a-2e12-4c51-ad24-7d2dde5c36a6}</Project>
       <Name>FMScoutFramework</Name>
     </ProjectReference>

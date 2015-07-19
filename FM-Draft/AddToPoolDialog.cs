@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FMDraft.Library;
 using FMDraft.Library.Entities;
-using FMDraft.Library.DataProjections;
 
 namespace FM_Draft
 {
@@ -29,7 +28,6 @@ namespace FM_Draft
         {
             gridView.DataSource = queryService
                 .GetPlayers(x => true)
-                .Select(x => x.AsProjected())
                 .ToList();
         }
     }
