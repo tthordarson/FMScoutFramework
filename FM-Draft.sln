@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMScoutFramework", "FMScout
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDraft.Library", "FMDraft.Library\FMDraft.Library.csproj", "{83EDCB99-B0D9-4A38-A9E7-2C81C379B440}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDraft.WPF", "FMDraft.WPF\FMDraft.WPF.csproj", "{86583E66-5097-4A6B-B351-1BC98CC2A150}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{83EDCB99-B0D9-4A38-A9E7-2C81C379B440}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83EDCB99-B0D9-4A38-A9E7-2C81C379B440}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83EDCB99-B0D9-4A38-A9E7-2C81C379B440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86583E66-5097-4A6B-B351-1BC98CC2A150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86583E66-5097-4A6B-B351-1BC98CC2A150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86583E66-5097-4A6B-B351-1BC98CC2A150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86583E66-5097-4A6B-B351-1BC98CC2A150}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
