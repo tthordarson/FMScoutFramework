@@ -16,28 +16,6 @@ namespace FMDraft.WPF.Templates
 
         public DraftPoolViewModel(GameCore core) : base(core)
         {
-            AddPlayersCommand = new RelayCommand(() =>
-            {
-                OpenAddPlayersDialog = true;
-            }, () =>
-            {
-                return IsLoaded;
-            });
-        }
-
-        public RelayCommand AddPlayersCommand { get; private set; }
-
-        public bool OpenAddPlayersDialog
-        {
-            get
-            {
-                return openAddPlayersDialog;
-            }
-            set
-            {
-                openAddPlayersDialog = value;
-                NotifyPropertyChanged("OpenAddPlayersDialog");
-            }
         }
 
         public IList<Player> AvailablePlayers

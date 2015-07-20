@@ -11,7 +11,10 @@
             
             <Button Grid.Row="0" Command="{Binding ProcessSelections}">Add selected player to Pool</Button>
         </Grid>
-        <DataGrid ItemsSource="{Binding SearchedPlayers}" AutoGenerateColumns="False">
+        <DataGrid
+            ItemsSource="{Binding SearchedPlayers}"
+            SelectedItem="{Binding SelectedPlayer}"
+            AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
                 <DataGridTextColumn Header="Age" Binding="{Binding Age}" />

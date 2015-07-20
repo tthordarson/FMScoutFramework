@@ -55,7 +55,7 @@
     <Compile Include="QueryService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\GitHub\FMScoutFramework\FMScoutFramework.csproj">
+    <ProjectReference Include="..\FMScoutFramework\FMScoutFramework.csproj">
       <Project>{e74fe82a-2e12-4c51-ad24-7d2dde5c36a6}</Project>
       <Name>FMScoutFramework</Name>
     </ProjectReference>

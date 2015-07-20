@@ -11,27 +11,42 @@ namespace FMDraft.WPF.Templates
 {
     public class SelectPlayersViewModel : AbstractViewModel
     {
+        private Player selectedPlayer;
+
         public SelectPlayersViewModel(GameCore core) : base(core)
         {
             if (IsLoaded)
             {
-                SelectedPlayers = new ObservableCollection<Player>();
                 SearchedPlayers = new ObservableCollection<Player>(core.QueryService.GetPlayers());
 
                 ProcessSelections = new RelayCommand(() =>
                 {
-                    core.GameState.DraftPool.AvailablePlayers.AddRange(SelectedPlayers);
-                    SelectedPlayers.Clear();
+                    core.GameState.DraftPool.AvailablePlayers.Add(SelectedPlayer);
+                    //core.GameState.DraftPool.AvailablePlayers.AddRange(SelectedPlayers);
                 }, () =>
                 {
-                    return !SelectedPlayers.Any();
+                    return true;
+                    //return SelectedPlayer != null;
                 });
             }
         }
 
         public RelayCommand ProcessSelections { get; private set; }
 
-        public ObservableCollection<Player> SelectedPlayers { get; set; }
+        public Player SelectedPlayer
+        {
+            get
+            {
+                return this.selectedPlayer;
+            }
+            set
+            {
+                this.selectedPlayer = value;
+                NotifyPropertyChanged("SelectedPlayer");
+            }
+        }
+
+        //public ObservableCollection<Player> SelectedPlayers { get; set; }
         public ObservableCollection<Player> SearchedPlayers { get; set; }
     }
 }
