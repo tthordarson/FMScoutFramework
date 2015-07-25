@@ -18,11 +18,15 @@ namespace FMDraft.WPF.Templates
             if (IsLoaded)
             {
                 SearchedPlayers = new ObservableCollection<Player>(core.QueryService.GetPlayers());
+                SelectedPlayers = new ObservableCollection<Player>();
 
                 ProcessSelections = new RelayCommand(() =>
                 {
-                    core.GameState.DraftPool.AvailablePlayers.Add(SelectedPlayer);
-                    //core.GameState.DraftPool.AvailablePlayers.AddRange(SelectedPlayers);
+                    if (SelectedPlayer != null)
+                    {
+                        PlayersAddedEvent(selectedPlayer);
+                        SearchedPlayers.Remove(selectedPlayer);
+                    }
                 }, () =>
                 {
                     return true;
@@ -46,7 +50,10 @@ namespace FMDraft.WPF.Templates
             }
         }
 
-        //public ObservableCollection<Player> SelectedPlayers { get; set; }
+        public ObservableCollection<Player> SelectedPlayers { get; set; }
+
+        public event Action<Player> PlayersAddedEvent = delegate { };
+
         public ObservableCollection<Player> SearchedPlayers { get; set; }
     }
 }

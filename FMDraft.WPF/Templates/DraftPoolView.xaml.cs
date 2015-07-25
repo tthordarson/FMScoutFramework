@@ -26,12 +26,12 @@ namespace FMDraft.WPF.Templates
             InitializeComponent();
             this.DataContext = new DraftPoolViewModel(core);
 
-            var playerSelectView = new SelectPlayersView(core);
+            //var playerSelectView = new SelectPlayersView(core);
 
-            Grid.SetRow(playerSelectView, 1);
-            Grid.SetColumn(playerSelectView, 1);
+            //Grid.SetRow(playerSelectView, 1);
+            //Grid.SetColumn(playerSelectView, 1);
 
-            this.MainGrid.Children.Add(playerSelectView);
+            //this.MainGrid.Children.Add(playerSelectView);
         }
     }
 }

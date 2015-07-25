@@ -21,10 +21,9 @@ namespace FMDraft.WPF.Templates
     /// </summary>
     public partial class SelectPlayersView : UserControl
     {
-        public SelectPlayersView(GameCore core)
+        public SelectPlayersView()
         {
             InitializeComponent();
-            this.DataContext = new SelectPlayersViewModel(core);
         }
     }
 }

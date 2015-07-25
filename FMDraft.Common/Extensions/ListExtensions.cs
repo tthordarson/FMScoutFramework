@@ -12,5 +12,10 @@ namespace FMDraft.Common.Extensions
         {
             items.ToList().ForEach(item => source.Add(item));
         }
+
+        public static void AddRange<T>(this IList<T> source, IList<T> items)
+        {
+            items.ToList().ForEach(item => source.Add(item));
+        }
     }
 }

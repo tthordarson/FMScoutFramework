@@ -44,6 +44,7 @@ namespace FMDraft.Library
                         CurrentAbility = x.CA,
                         DateOfBirth = x.DateOfBirth,
                         FullName = string.Format("{0} {1}", x.Firstname, x.Lastname),
+                        Position = x.PlayerStats.Position,
                         PotentialAbility = x.PA
                     };
                 });
