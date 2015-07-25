@@ -21,15 +21,19 @@ namespace FMDraft.Library
 
         public IEnumerable<Nation> GetNations()
         {
-            return core.Nations
-                .Select(x => 
-                {
-                    return new Nation()
-                    {
-                        Name = x.Name
-                    };
-                })
-                .OrderBy(x => x.Name); 
+            var mockNations = new string[] { "Argentina", "England", "Brazil", "Canada", "Iceland", "Denmark" };
+
+            return mockNations.Select(x => { return new Nation() { Name = x }; }).OrderBy(x => x.Name);
+
+            //return core.Nations
+            //    .Select(x => 
+            //    {
+            //        return new Nation()
+            //        {
+            //            Name = x.Name
+            //        };
+            //    })
+            //    .OrderBy(x => x.Name); 
         }
 
         public IEnumerable<Player> GetPlayers(Func<Player, bool> filter = null, Func<Player, bool> orderBy = null)
