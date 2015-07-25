@@ -21,17 +21,9 @@ namespace FMDraft.WPF.Templates
     /// </summary>
     public partial class DraftPoolView : UserControl
     {
-        public DraftPoolView(GameCore core)
+        public DraftPoolView()
         {
             InitializeComponent();
-            this.DataContext = new DraftPoolViewModel(core);
-
-            //var playerSelectView = new SelectPlayersView(core);
-
-            //Grid.SetRow(playerSelectView, 1);
-            //Grid.SetColumn(playerSelectView, 1);
-
-            //this.MainGrid.Children.Add(playerSelectView);
         }
     }
 }

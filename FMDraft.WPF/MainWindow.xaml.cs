@@ -22,56 +22,56 @@ namespace FMDraft.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GameCore game = null;
+        //private GameCore game = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            InitializeGame();
+            //InitializeGame();
         }
 
-        public bool IsGameLoaded
-        {
-            get
-            {
-                return game != null && game.IsLoaded;
-            }
-        }
+        //public bool IsGameLoaded
+        //{
+        //    get
+        //    {
+        //        return game != null && game.IsLoaded;
+        //    }
+        //}
 
-        private void InitializeGame()
-        {
-            game = new GameCore();
+        //private void InitializeGame()
+        //{
+        //    game = new GameCore();
 
-            game.LoadFailedCallback += () =>
-            {
-                MessageBox.Show("Could not load data. Ensure that Football Manager 2015 is running and that no Firewall is prevent this application from accessing it.");
-            };
+        //    game.LoadFailedCallback += () =>
+        //    {
+        //        MessageBox.Show("Could not load data. Ensure that Football Manager 2015 is running and that no Firewall is prevent this application from accessing it.");
+        //    };
 
-            game.LoadCompleteCallback += () =>
-            {
-                MessageBox.Show("Data has been loaded");
-            };
-        }
+        //    game.LoadCompleteCallback += () =>
+        //    {
+        //        MessageBox.Show("Data has been loaded");
+        //    };
+        //}
 
-        private void New_Click(object sender, RoutedEventArgs e)
-        {
-            game.Load();
+        //private void New_Click(object sender, RoutedEventArgs e)
+        //{
+        //    game.Load();
             
-        }
+        //}
 
-        private void Quit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        //private void Quit_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Close();
+        //}
 
-        private void ConfederationTab_Selected(object sender, RoutedEventArgs e)
-        {
-            ConfederationTab.Content = new ConfederationView(game);
-        }
+        //private void ConfederationTab_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    ConfederationTab.Content = new ConfederationView(game);
+        //}
 
-        private void DraftPoolTab_Selected(object sender, RoutedEventArgs e)
-        {
-            DraftPoolTab.Content = new DraftPoolView(game);
-        }
+        //private void DraftPoolTab_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    DraftPoolTab.Content = new DraftPoolView(game);
+        //}
     }
 }

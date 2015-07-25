@@ -17,14 +17,7 @@ namespace FMDraft.WPF.Templates
     {
         public DraftPoolViewModel(GameCore core) : base(core)
         {
-            if (IsLoaded)
-            {
-                AvailablePlayers = new ObservableCollection<Player>(this.core.GameState.DraftPool.AvailablePlayers);
-            }
-            else
-            {
-                AvailablePlayers = new ObservableCollection<Player>();
-            }
+            Reload();
 
             AvailablePlayers.CollectionChanged += (sender, e) =>
             {
@@ -34,7 +27,6 @@ namespace FMDraft.WPF.Templates
                     {
                         this.core.GameState.DraftPool.AvailablePlayers.Add(item as Player);
                     }
-                    //this.core.GameState.DraftPool.AvailablePlayers.AddRange(e.NewItems);
                 }
             };
 
@@ -45,28 +37,19 @@ namespace FMDraft.WPF.Templates
             };
         }
 
+        public void Reload()
+        {
+            if (IsLoaded)
+            {
+                AvailablePlayers = new ObservableCollection<Player>(this.core.GameState.DraftPool.AvailablePlayers);
+            }
+            else
+            {
+                AvailablePlayers = new ObservableCollection<Player>();
+            }
+        }
+
         public ObservableCollection<Player> AvailablePlayers { get; set; }
-
-        //public IList<Player> AvailablePlayers
-        //{
-        //    get
-        //    {
-        //        if (IsLoaded)
-        //        {
-        //            return this.core.GameState.DraftPool.AvailablePlayers;
-        //        }
-
-        //        return null;
-        //    }
-        //    set
-        //    {
-        //        if (IsLoaded)
-        //        {
-        //            this.core.GameState.DraftPool.AvailablePlayers = value;
-        //            NotifyPropertyChanged("AvailablePlayers");
-        //        }
-        //    }
-        //}
 
         private SelectPlayersViewModel _SearchPlayerViewModel;
 

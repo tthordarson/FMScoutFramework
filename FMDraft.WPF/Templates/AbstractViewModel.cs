@@ -14,7 +14,7 @@ namespace FMDraft.WPF.Templates
 
         public AbstractViewModel(GameCore core)
         {
-            if (core.IsLoaded)
+            if (core != null && core.IsLoaded)
             {
                 this.core = core;
             }

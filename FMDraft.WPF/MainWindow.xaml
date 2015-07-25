@@ -7,21 +7,36 @@
         xmlns:Tabs="clr-namespace:FMDraft.WPF.Templates" x:Class="FMDraft.WPF.MainWindow"
         mc:Ignorable="d"
         Title="FM Draft" Height="800" Width="1400">
-
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type Tabs:ConfederationViewModel}">
+            <Tabs:ConfederationView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Tabs:DraftPoolViewModel}">
+            <Tabs:DraftPoolView />
+        </DataTemplate>
+    </Window.Resources>
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem x:Name="New" Header="New" Click="New_Click" />
+                <MenuItem x:Name="New" Header="New" Command="{Binding NewGame}" />
                 <Separator />
-                <MenuItem x:Name="Quit" Header="Quit" Click="Quit_Click" />
+                <MenuItem x:Name="Quit" Header="Quit" Command="{Binding QuitProgram}" />
             </MenuItem>
         </Menu>
         <Grid>
-            <TabControl>
-                <TabItem x:Name="ConfederationTab" Header="Confederation Setup" Selector.Selected="ConfederationTab_Selected" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TabControl SelectedValue="{Binding SelectedTab}" Grid.Row="0">
+                <TabItem x:Name="ConfederationTab" Header="Confederation Setup" />
                 <TabItem x:Name="LeagueSetupTab" Header="League Setup"/>
-                <TabItem x:Name="DraftPoolTab" Header="Draft Pool" Selector.Selected="DraftPoolTab_Selected" />
+                <TabItem x:Name="DraftPoolTab" Header="Draft Pool" />
             </TabControl>
+            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"></ContentControl>
         </Grid>
     </DockPanel>
 </Window>

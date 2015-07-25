@@ -21,10 +21,9 @@ namespace FMDraft.WPF.Templates
     /// </summary>
     public partial class ConfederationView : UserControl
     {
-        public ConfederationView(GameCore core)
+        public ConfederationView()
         {
             InitializeComponent();
-            this.DataContext = new ConfederationViewModel(core);
         }
     }
 }
