@@ -1,4 +1,5 @@
 ﻿using FMDraft.Library.Entities;
+using FMDraft.Library.Tests;
 using FMScoutFramework.Core;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,18 @@ namespace FMDraft.Library
     {
         private FMCore core;
         private Configuration configuration;
+        private MockService mockService;
 
         public QueryService(FMCore core)
         {
             this.core = core;
             this.configuration = new Configuration();
+            this.mockService = new MockService();
         }
 
         public IEnumerable<Nation> GetNations()
         {
-            var mockNations = new string[] { "Argentina", "England", "Brazil", "Canada", "Iceland", "Denmark" };
-
-            return mockNations.Select(x => { return new Nation() { Name = x }; }).OrderBy(x => x.Name);
+            return mockService.GetNations();
 
             //return core.Nations
             //    .Select(x => 
@@ -34,6 +35,11 @@ namespace FMDraft.Library
             //        };
             //    })
             //    .OrderBy(x => x.Name); 
+        }
+
+        public IEnumerable<City> GetCities(Nation nation)
+        {
+            return mockService.GetCities(nation);
         }
 
         public IEnumerable<Player> GetPlayers(Func<Player, bool> filter = null, Func<Player, bool> orderBy = null)

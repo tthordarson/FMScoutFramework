@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\DraftCard.cs" />
     <Compile Include="Entities\DraftPool.cs" />
@@ -53,8 +54,13 @@
     <Compile Include="GameCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryService.cs" />
+    <Compile Include="Tests\MockService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FMDraft.Common\FMDraft.Common.csproj">
+      <Project>{49ae3444-15d3-478c-aecc-a8d24df04464}</Project>
+      <Name>FMDraft.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FMScoutFramework\FMScoutFramework.csproj">
       <Project>{e74fe82a-2e12-4c51-ad24-7d2dde5c36a6}</Project>
       <Name>FMScoutFramework</Name>
