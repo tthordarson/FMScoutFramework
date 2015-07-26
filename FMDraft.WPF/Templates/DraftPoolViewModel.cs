@@ -17,7 +17,7 @@ namespace FMDraft.WPF.Templates
     {
         public DraftPoolViewModel(GameCore core) : base(core)
         {
-            Reload();
+            Reload(core);
 
             AvailablePlayers.CollectionChanged += (sender, e) =>
             {
@@ -37,8 +37,10 @@ namespace FMDraft.WPF.Templates
             };
         }
 
-        public void Reload()
+        public override void Reload(GameCore core)
         {
+            base.Reload(core);
+
             if (IsLoaded)
             {
                 AvailablePlayers = new ObservableCollection<Player>(this.core.GameState.DraftPool.AvailablePlayers);
@@ -46,6 +48,11 @@ namespace FMDraft.WPF.Templates
             else
             {
                 AvailablePlayers = new ObservableCollection<Player>();
+            }
+
+            if (SearchPlayerViewModel != null)
+            {
+                SearchPlayerViewModel.Reload(core);
             }
         }
 

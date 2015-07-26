@@ -15,23 +15,29 @@ namespace FMDraft.WPF.Templates
 
         public SelectPlayersViewModel(GameCore core) : base(core)
         {
+            ProcessSelections = new RelayCommand(() =>
+            {
+                if (SelectedPlayer != null)
+                {
+                    PlayersAddedEvent(selectedPlayer);
+                    SearchedPlayers.Remove(selectedPlayer);
+                }
+            }, () =>
+            {
+                return true;
+                //return SelectedPlayer != null;
+            });
+
+            Reload(core);
+        }
+
+        public override void Reload(GameCore core)
+        {
+            base.Reload(core);
+
             if (IsLoaded)
             {
                 SearchedPlayers = new ObservableCollection<Player>(core.QueryService.GetPlayers());
-                SelectedPlayers = new ObservableCollection<Player>();
-
-                ProcessSelections = new RelayCommand(() =>
-                {
-                    if (SelectedPlayer != null)
-                    {
-                        PlayersAddedEvent(selectedPlayer);
-                        SearchedPlayers.Remove(selectedPlayer);
-                    }
-                }, () =>
-                {
-                    return true;
-                    //return SelectedPlayer != null;
-                });
             }
         }
 
@@ -49,8 +55,6 @@ namespace FMDraft.WPF.Templates
                 NotifyPropertyChanged("SelectedPlayer");
             }
         }
-
-        public ObservableCollection<Player> SelectedPlayers { get; set; }
 
         public event Action<Player> PlayersAddedEvent = delegate { };
 

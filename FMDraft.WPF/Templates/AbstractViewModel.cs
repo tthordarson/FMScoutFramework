@@ -36,6 +36,11 @@ namespace FMDraft.WPF.Templates
             }
         }
 
+        public virtual void Reload(GameCore core)
+        {
+            this.core = core;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -27,19 +27,25 @@ namespace FMDraft.WPF
 
             QuitProgram = new RelayCommand(() =>
             {
-                // Quit;
+                QuitProgramCallback();
             });
 
             core.LoadFailedCallback += () =>
             {
+                LoadFailedCallback();
                 IsGameLoaded = false;
             };
 
             core.LoadCompleteCallback += () =>
             {
+                LoadCompleteCallback();
                 IsGameLoaded = true;
             };
         }
+
+        public Action LoadCompleteCallback = delegate { };
+        public Action LoadFailedCallback = delegate { };
+        public Action QuitProgramCallback = delegate { };
 
         public RelayCommand NewGame { get; private set; }
 
@@ -79,7 +85,7 @@ namespace FMDraft.WPF
                     case "ConfederationTab":
                         return confederationViewModel;
                     case "DraftPoolTab":
-                        draftViewModel.Reload();
+                        draftViewModel.Reload(this.core);
                         return draftViewModel;
                     default:
                         return null;

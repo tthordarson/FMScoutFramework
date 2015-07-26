@@ -7,9 +7,6 @@
         xmlns:Tabs="clr-namespace:FMDraft.WPF.Templates" x:Class="FMDraft.WPF.MainWindow"
         mc:Ignorable="d"
         Title="FM Draft" Height="800" Width="1400">
-    <Window.DataContext>
-        <local:MainWindowViewModel />
-    </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type Tabs:ConfederationViewModel}">
             <Tabs:ConfederationView />
@@ -31,7 +28,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TabControl SelectedValue="{Binding SelectedTab}" Grid.Row="0">
+            <TabControl IsEnabled="{Binding IsGameLoaded}" SelectedValue="{Binding SelectedTab}" Grid.Row="0">
                 <TabItem x:Name="ConfederationTab" Header="Confederation Setup" />
                 <TabItem x:Name="LeagueSetupTab" Header="League Setup"/>
                 <TabItem x:Name="DraftPoolTab" Header="Draft Pool" />
