@@ -13,7 +13,14 @@ namespace FMDraft.WPF.Templates
     {
         public ConfederationViewModel(GameCore core) : base(core)
         {
-            if (core.IsLoaded)
+            Reload(core);
+        }
+
+        public override void Reload(GameCore core)
+        {
+            base.Reload(core);
+
+            if (IsLoaded)
             {
                 AllNations = new ObservableCollection<Nation>(core.QueryService.GetNations());
             }
@@ -36,9 +43,12 @@ namespace FMDraft.WPF.Templates
                 {
                     this.core.GameState.PrincipalNation = value;
                     NotifyPropertyChanged("PrincipalNation");
+                    PrincipalNationChanged();
                 }
             }
         }
+
+        public event Action PrincipalNationChanged = delegate { };
 
         public ObservableCollection<Nation> AllNations { get; set; }
     }

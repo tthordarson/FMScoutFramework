@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FMDraft.WPF"
-        xmlns:Tabs="clr-namespace:FMDraft.WPF.Templates" x:Class="FMDraft.WPF.MainWindow"
+        xmlns:Tabs="clr-namespace:FMDraft.WPF.Templates"
+        xmlns:LeagueSetup="clr-namespace:FMDraft.WPF.Templates.LeagueSetup"
+        x:Class="FMDraft.WPF.MainWindow"
         mc:Ignorable="d"
         Title="FM Draft" Height="800" Width="1400">
     <Window.Resources>
@@ -13,6 +15,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type Tabs:DraftPoolViewModel}">
             <Tabs:DraftPoolView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type LeagueSetup:LeagueSetupMasterViewModel}">
+            <LeagueSetup:LeagueSetupMasterView />
         </DataTemplate>
     </Window.Resources>
     <DockPanel LastChildFill="True">
@@ -30,7 +35,7 @@
             </Grid.RowDefinitions>
             <TabControl IsEnabled="{Binding IsGameLoaded}" SelectedValue="{Binding SelectedTab}" Grid.Row="0">
                 <TabItem x:Name="ConfederationTab" Header="Confederation Setup" />
-                <TabItem x:Name="LeagueSetupTab" Header="League Setup"/>
+                <TabItem x:Name="LeagueSetupTab" Header="League Setup" IsEnabled="{Binding CanViewLeagueSetup}"/>
                 <TabItem x:Name="DraftPoolTab" Header="Draft Pool" />
             </TabControl>
             <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"></ContentControl>

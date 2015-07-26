@@ -24,17 +24,17 @@ namespace FMDraft.Library
 
         public IEnumerable<Nation> GetNations()
         {
-            //return mockService.GetNations();
+            return mockService.GetNations();
 
-            return core.Nations
-                .Select(x =>
-                {
-                    return new Nation()
-                    {
-                        Name = x.Name
-                    };
-                })
-                .OrderBy(x => x.Name);
+            //return core.Nations
+            //    .Select(x =>
+            //    {
+            //        return new Nation()
+            //        {
+            //            Name = x.Name
+            //        };
+            //    })
+            //    .OrderBy(x => x.Name);
         }
 
         public IEnumerable<City> GetCities(Nation nation)

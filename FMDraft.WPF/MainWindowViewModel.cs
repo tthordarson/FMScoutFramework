@@ -1,5 +1,6 @@
 ﻿using FMDraft.Library;
 using FMDraft.WPF.Templates;
+using FMDraft.WPF.Templates.LeagueSetup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace FMDraft.WPF
     {
         private ConfederationViewModel confederationViewModel;
         private DraftPoolViewModel draftViewModel;
+        private LeagueSetupMasterViewModel leagueSetupViewModel;
 
         public MainWindowViewModel() : base(null)
         {
@@ -20,6 +22,12 @@ namespace FMDraft.WPF
 
             confederationViewModel = new ConfederationViewModel(core);
             draftViewModel = new DraftPoolViewModel(core);
+            leagueSetupViewModel = new LeagueSetupMasterViewModel(core);
+
+            confederationViewModel.PrincipalNationChanged += () =>
+            {
+                NotifyPropertyChanged("CanViewLeagueSetup");
+            };
 
             NewGame = new RelayCommand(() => {
                 core.Load();
@@ -63,6 +71,14 @@ namespace FMDraft.WPF
             }
         }
 
+        public bool CanViewLeagueSetup
+        {
+            get
+            {
+                return this.core.GameState != null && this.core.GameState.PrincipalNation != null;
+            }
+        }
+
         private TabItem _SelectedTab;
 
         public TabItem SelectedTab
@@ -83,7 +99,11 @@ namespace FMDraft.WPF
                 switch(SelectedTab.Name)
                 {
                     case "ConfederationTab":
+                        confederationViewModel.Reload(this.core);
                         return confederationViewModel;
+                    case "LeagueSetupTab":
+                        leagueSetupViewModel.Reload(this.core);
+                        return leagueSetupViewModel;
                     case "DraftPoolTab":
                         draftViewModel.Reload(this.core);
                         return draftViewModel;

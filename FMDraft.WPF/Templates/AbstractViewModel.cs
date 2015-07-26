@@ -17,6 +17,11 @@ namespace FMDraft.WPF.Templates
             if (core != null && core.IsLoaded)
             {
                 this.core = core;
+
+                core.LoadCompleteCallback += () =>
+                {
+                    Reload(core);
+                };
             }
         }
 
