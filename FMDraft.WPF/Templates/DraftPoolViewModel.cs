@@ -17,6 +17,8 @@ namespace FMDraft.WPF.Templates
     {
         public DraftPoolViewModel(GameCore core) : base(core)
         {
+            AvailablePlayers = new ObservableCollection<Player>();
+
             Reload(core);
 
             AvailablePlayers.CollectionChanged += (sender, e) =>
@@ -41,13 +43,11 @@ namespace FMDraft.WPF.Templates
         {
             base.Reload(core);
 
+            AvailablePlayers.Clear();
+
             if (IsLoaded)
             {
-                AvailablePlayers = new ObservableCollection<Player>(this.core.GameState.DraftPool.AvailablePlayers);
-            }
-            else
-            {
-                AvailablePlayers = new ObservableCollection<Player>();
+                AvailablePlayers.AddRange(this.core.GameState.DraftPool.AvailablePlayers);
             }
 
             if (SearchPlayerViewModel != null)

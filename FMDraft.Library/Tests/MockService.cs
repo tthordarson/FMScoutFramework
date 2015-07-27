@@ -83,7 +83,8 @@ namespace FMDraft.Library.Tests
                 {
                     Name = x
                 };
-            });
+            })
+            .OrderBy(x => x.Name);
         }
     }
 }

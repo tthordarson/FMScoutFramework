@@ -6,7 +6,19 @@
              xmlns:local="clr-namespace:FMDraft.WPF.Templates.LeagueSetup"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:LeagueItemViewModel}">
+            <local:LeagueItemView />
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <Label>Leage setup here...</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Command="{Binding AddLeague}">Add League</Button>
+        <TabControl Grid.Row="1" ItemsSource="{Binding LeagueItemViews}" SelectedItem="{Binding SelectedLeagueItemView}" DisplayMemberPath="NameOrDefault" />
+        <!--<ContentControl Grid.Row="2" Content="{Binding SelectedLeagueItemView}" />-->
     </Grid>
 </UserControl>
