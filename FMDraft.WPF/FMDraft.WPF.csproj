@@ -67,6 +67,11 @@
       <DependentUpon>DraftPoolView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\DraftPoolViewModel.cs" />
+    <Compile Include="Templates\Drafts\DraftCardViewModel.cs" />
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeamsView.xaml.cs">
+      <DependentUpon>GenerateRandomTeamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeamsViewModel.cs" />
     <Compile Include="Templates\LeagueSetup\LeagueItemView.xaml.cs">
       <DependentUpon>LeagueItemView.xaml</DependentUpon>
     </Compile>
@@ -97,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\DraftPoolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\LeagueSetup\GenerateRandomTeamsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

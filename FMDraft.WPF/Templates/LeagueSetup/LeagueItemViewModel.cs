@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FMDraft.WPF.Templates.LeagueSetup
 {
@@ -17,6 +18,16 @@ namespace FMDraft.WPF.Templates.LeagueSetup
         {
             Cities = new ObservableCollection<City>();
             TeamViewModels = new ObservableCollection<TeamViewModel>();
+            GenerateRandomTeamsViewModel = new GenerateRandomTeamsViewModel(core);
+
+            GenerateRandomTeamsTogglePopup = new RelayCommand(() =>
+            {
+                ToggleRandomTeamsPopup = !ToggleRandomTeamsPopup;
+
+                NotifyPropertyChanged("ToggleRandomTeamsPopup");
+                //NotifyPropertyChanged("TeamListViewVisibility");
+                //NotifyPropertyChanged("GenerateRandomTeamsButtonVisibility");
+            });
         }
 
         public override void Reload(GameCore core)
@@ -30,6 +41,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup
         }
 
         public event Action Changed = delegate { };
+
+        public RelayCommand GenerateRandomTeamsTogglePopup { get; private set; }
 
         private string _Name;
 
@@ -58,8 +71,58 @@ namespace FMDraft.WPF.Templates.LeagueSetup
             }
         }
 
+        public Visibility TeamListViewVisibility
+        {
+            get
+            {
+                if (TeamViewModels.Any())
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
+        public Visibility GenerateRandomTeamsButtonVisibility
+        {
+            get
+            {
+                if (TeamListViewVisibility == Visibility.Hidden)
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
         public ObservableCollection<TeamViewModel> TeamViewModels { get; set; }
         public ObservableCollection<City> Cities { get; set; }
+
+        private bool _ToggleRandomTeamsPopup;
+
+        public bool ToggleRandomTeamsPopup
+        {
+            get { return _ToggleRandomTeamsPopup; }
+            set { _ToggleRandomTeamsPopup = value; }
+        }
+
+        private GenerateRandomTeamsViewModel _GenerateRandomTeamsViewModel;
+
+        public GenerateRandomTeamsViewModel GenerateRandomTeamsViewModel
+        {
+            get { return _GenerateRandomTeamsViewModel; }
+            set
+            {
+                _GenerateRandomTeamsViewModel = value;
+                NotifyPropertyChanged("GenerateRandomTeamsViewModel");
+            }
+        }
 
         public League ToData()
         {
