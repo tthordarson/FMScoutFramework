@@ -41,6 +41,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                 _Name = value;
                 NotifyPropertyChanged("Name");
                 NotifyPropertyChanged("NameOrDefault");
+                Changed();
             }
         }
 

@@ -26,14 +26,6 @@ namespace FMDraft.WPF.Templates.LeagueSetup
             });
         }
 
-        public override void Reload(GameCore core)
-        {
-            base.Reload(core);
-
-            LeagueItemViews.Clear();
-            LeagueItemViews.AddRange(ToViewModels(core.GameState.Leagues));
-        }
-
         private IEnumerable<LeagueItemViewModel> ToViewModels(IEnumerable<League> leagues)
         {
             return leagues.Select(league =>
@@ -63,16 +55,17 @@ namespace FMDraft.WPF.Templates.LeagueSetup
 
         public ObservableCollection<LeagueItemViewModel> LeagueItemViews { get; set; }
 
-        //private LeagueItemViewModel _SelectedLeagueItemView;
+        private LeagueItemViewModel _SelectedLeagueItemView;
 
-        //public LeagueItemViewModel SelectedLeagueItemView
-        //{
-        //    get { return _SelectedLeagueItemView; }
-        //    set
-        //    {
-        //        _SelectedLeagueItemView = value;
-        //        NotifyPropertyChanged("SelectedLeagueItemView");
-        //    }
-        //}
+        public LeagueItemViewModel SelectedLeagueItemView
+        {
+            get { return _SelectedLeagueItemView; }
+            set
+            {
+                _SelectedLeagueItemView = value;
+                NotifyPropertyChanged("SelectedLeagueItemView");
+                UpdateCore();
+            }
+        }
     }
 }

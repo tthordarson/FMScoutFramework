@@ -18,7 +18,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Command="{Binding AddLeague}">Add League</Button>
-        <TabControl Grid.Row="1" ItemsSource="{Binding LeagueItemViews}" SelectedItem="{Binding SelectedLeagueItemView}" DisplayMemberPath="NameOrDefault" />
-        <!--<ContentControl Grid.Row="2" Content="{Binding SelectedLeagueItemView}" />-->
+        <TabControl
+            Grid.Row="1"
+            ItemsSource="{Binding LeagueItemViews}"
+            SelectedItem="{Binding SelectedLeagueItemView}"
+            DisplayMemberPath="NameOrDefault" />
     </Grid>
 </UserControl>
