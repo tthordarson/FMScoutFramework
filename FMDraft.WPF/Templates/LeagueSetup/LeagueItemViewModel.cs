@@ -23,12 +23,36 @@ namespace FMDraft.WPF.Templates.LeagueSetup
 
             GenerateRandomTeamsTogglePopup = new RelayCommand(() =>
             {
-                ToggleRandomTeamsPopup = !ToggleRandomTeamsPopup;
-
-                NotifyPropertyChanged("ToggleRandomTeamsPopup");
-                //NotifyPropertyChanged("TeamListViewVisibility");
-                //NotifyPropertyChanged("GenerateRandomTeamsButtonVisibility");
+                TogglePopup();
             });
+
+            GenerateRandomTeams = new RelayCommand(() =>
+            {
+                var teams = GenerateRandomTeamsViewModel.GenerateTeams();
+
+                TeamViewModels.Clear();
+                TeamViewModels.AddRange(teams.Select(team =>
+                {
+                    return new TeamViewModel(core)
+                    {
+                        Name = team.Name,
+                        City = team.City,
+                        BackgroundColor = team.BackgroundColor,
+                        ForegroundColor = team.ForegroundColor
+                    };
+                }));
+
+                NotifyPropertyChanged("TeamListViewVisibility");
+                NotifyPropertyChanged("GenerateRandomTeamsButtonVisibility");
+                TogglePopup();
+            });
+        }
+
+        private void TogglePopup()
+        {
+            ToggleRandomTeamsPopup = !ToggleRandomTeamsPopup;
+
+            NotifyPropertyChanged("ToggleRandomTeamsPopup");
         }
 
         public override void Reload(GameCore core)
@@ -44,6 +68,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup
         public event Action Changed = delegate { };
 
         public RelayCommand GenerateRandomTeamsTogglePopup { get; private set; }
+
+        public RelayCommand GenerateRandomTeams { get; private set; }
 
         private string _Name;
 

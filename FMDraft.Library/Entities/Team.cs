@@ -14,6 +14,9 @@ namespace FMDraft.Library.Entities
         public int Reputation { get; set; }
         public IEnumerable<DraftCard> DraftCards { get; set; }
 
+        public string ForegroundColor { get; set; }
+        public string BackgroundColor { get; set; }
+
         public Team()
         {
             this.DraftCards = new List<DraftCard>();

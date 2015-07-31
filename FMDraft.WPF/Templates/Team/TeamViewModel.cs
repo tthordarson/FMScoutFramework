@@ -1,4 +1,5 @@
 ﻿using FMDraft.Library;
+using FMDraft.Library.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,39 @@ namespace FMDraft.WPF.Templates.Team
         }
 
         public event Action Changed = delegate { };
+
+        private string _Name;
+
+        public string Name
+        {
+            get { return _Name; }
+            set { _Name = value; }
+        }
+
+        private string _ForegroundColor;
+
+        public string ForegroundColor
+        {
+            get { return _ForegroundColor; }
+            set { _ForegroundColor = value; }
+        }
+
+        private string _BackgroundColor;
+
+        public string BackgroundColor
+        {
+            get { return _BackgroundColor; }
+            set { _BackgroundColor = value; }
+        }
+
+        private City _City;
+
+        public City City
+        {
+            get { return _City; }
+            set { _City = value; }
+        }
+
 
         public FMDraft.Library.Entities.Team ToData()
         {

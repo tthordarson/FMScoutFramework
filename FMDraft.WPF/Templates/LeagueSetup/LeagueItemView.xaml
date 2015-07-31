@@ -58,7 +58,7 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <ContentControl Grid.ColumnSpan="2" Grid.Row="0" Content="{Binding GenerateRandomTeamsViewModel}" />
-                <Button Grid.Column="0" Grid.Row="1">Generate</Button>
+                <Button Grid.Column="0" Grid.Row="1" Command="{Binding GenerateRandomTeams}">Generate</Button>
                 <Button Grid.Column="1" Grid.Row="1" Command="{Binding GenerateRandomTeamsTogglePopup}">Cancel</Button>
             </Grid>
         </Popup>

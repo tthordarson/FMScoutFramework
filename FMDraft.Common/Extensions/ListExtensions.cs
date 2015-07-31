@@ -17,5 +17,10 @@ namespace FMDraft.Common.Extensions
         {
             items.ToList().ForEach(item => source.Add(item));
         }
+
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            source.ToList().ForEach(action);
+        }
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="GameCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryService.cs" />
+    <Compile Include="RandomService.cs" />
     <Compile Include="Tests\MockService.cs" />
   </ItemGroup>
   <ItemGroup>

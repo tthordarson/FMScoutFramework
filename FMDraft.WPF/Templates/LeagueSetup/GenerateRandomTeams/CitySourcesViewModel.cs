@@ -18,19 +18,19 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
         {
             this.numberOfTeams = numberOfTeams;
 
-            CityCount = new ObservableCollection<Tuple<City, int>>();
+            CityCount = new ObservableCollection<Pair<City, int>>();
 
             SearchAndAddCity = new RelayCommand(() => 
             {
                 var nation = core.GameState.PrincipalNation;
 
-                var city = core.QueryService.GetCities(nation).FirstOrDefault(x => x.Name.Contains(SearchCityName));
+                var city = core.QueryService.GetCities(nation).FirstOrDefault(x => !string.IsNullOrEmpty(SearchCityName) && x.Name.Contains(SearchCityName));
 
                 if (city != null)
                 {
-                    var tuple = new Tuple<City, int>(city, 1);
+                    var pair = new Pair<City, int>(city, 1);
 
-                    CityCount.Add(tuple);
+                    CityCount.Add(pair);
                     SearchCityName = "";
                     NotifyPropertyChanged("SearchCityName");
                     NotifyPropertyChanged("CityCount");
@@ -40,7 +40,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
         public RelayCommand SearchAndAddCity { get; set; }
 
-        public ObservableCollection<Tuple<City, int>> CityCount { get; set; }
+        public ObservableCollection<Pair<City, int>> CityCount { get; set; }
 
         private string _SearchCityName;
 

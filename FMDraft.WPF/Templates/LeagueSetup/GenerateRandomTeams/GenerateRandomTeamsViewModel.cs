@@ -1,4 +1,5 @@
 ﻿using FMDraft.Library;
+using FMDraft.Common.Extensions;
 using FMDraft.WPF.Templates.Drafts;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,26 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
         public RelayCommand EditDraftCards { get; private set; }
 
         public RelayCommand EditCitySources { get; private set; }
+
+        public IEnumerable<FMDraft.Library.Entities.Team> GenerateTeams()
+        {
+            var cities = citySourcesVm.CityCount.AsEnumerable();
+
+            var teams = new List<FMDraft.Library.Entities.Team>();
+
+            cities.ForEach((cityCount) =>
+            {
+                var city = cityCount.Item1;
+                var count = cityCount.Item2;
+
+                for (int i = 0; i < count; i++)
+                {
+                    teams.Add(RandomService.GetTeam(city));
+                }
+            });
+
+            return teams;
+        }
 
         private AbstractViewModel _RightSideViewModel;
 

@@ -26,10 +26,14 @@
         
         <Button Grid.Row="1" Command="{Binding SearchAndAddCity}">Search and Add City</Button>
         
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{Binding CityCount}" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="4"
+                  EnableRowVirtualization="True"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  ItemsSource="{Binding CityCount}"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="City" Binding="{Binding Item1.Name}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Count" Binding="{Binding Item2}" IsReadOnly="False" />
+                <DataGridTextColumn Header="Count" Binding="{Binding Item2, Mode=TwoWay}" IsReadOnly="False" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
