@@ -1,6 +1,7 @@
 ﻿using FMDraft.Common.Extensions;
 using FMDraft.Library;
 using FMDraft.Library.Entities;
+using FMDraft.WPF.Templates.Drafts;
 using FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams;
 using FMDraft.WPF.Templates.Team;
 using System;
@@ -38,7 +39,19 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                         Name = team.Name,
                         City = team.City,
                         BackgroundColor = team.BackgroundColor,
-                        ForegroundColor = team.ForegroundColor
+                        ForegroundColor = team.ForegroundColor,
+                        DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(draftCard =>
+                        {
+                            var index = team.DraftCards.IndexOf(draftCard);
+
+                            return new DraftCardViewModel(core)
+                            {
+                                PickNumber = index,
+                                ContractLength = draftCard.ContractYears,
+                                MaximumAbility = draftCard.MaxCurrentAbility,
+                                WeeklySalary = draftCard.ContractSalary
+                            };
+                        }))
                     };
                 }));
 
@@ -148,6 +161,18 @@ namespace FMDraft.WPF.Templates.LeagueSetup
             {
                 _GenerateRandomTeamsViewModel = value;
                 NotifyPropertyChanged("GenerateRandomTeamsViewModel");
+            }
+        }
+
+        private TeamViewModel _SelectedTeamViewModel;
+
+        public TeamViewModel SelectedTeamViewModel
+        {
+            get { return _SelectedTeamViewModel; }
+            set
+            {
+                _SelectedTeamViewModel = value;
+                NotifyPropertyChanged("SelectedTeamViewModel");
             }
         }
 

@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="FMDraft.WPF.Templates.Drafts.DraftCardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FMDraft.WPF.Templates.Drafts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding PickNumberString}"></Label>
+
+        <Label Grid.Row="1" Grid.Column="0">Weekly Salary</Label>
+        <Label Grid.Row="1" Grid.Column="1" Content="{Binding WeeklySalaryString}"></Label>
+
+        <Label Grid.Row="2" Grid.Column="0">Contract Length</Label>
+        <Label Grid.Row="2" Grid.Column="1" Content="{Binding ContractLength}"></Label>
+
+        <Label Grid.Row="3" Grid.Column="0">Minimum Ability</Label>
+        <Label Grid.Row="3" Grid.Column="1" Content="{Binding MinimumAbility}"></Label>
+
+        <Label Grid.Row="4" Grid.Column="0">Maximum Ability</Label>
+        <Label Grid.Row="4" Grid.Column="1" Content="{Binding MaximumAbility}"></Label>
+
+        <Label Grid.Row="5" Grid.Column="0">Minimum Age</Label>
+        <Label Grid.Row="5" Grid.Column="1" Content="{Binding MinimumAge}"></Label>
+
+        <Label Grid.Row="6" Grid.Column="0">Maximum Age</Label>
+        <Label Grid.Row="6" Grid.Column="1" Content="{Binding MaximumAge}"></Label>
+    </Grid>
+</UserControl>

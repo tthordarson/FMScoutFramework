@@ -1,4 +1,5 @@
 ﻿using FMDraft.Library;
+using FMDraft.Library.Entities;
 using FMDraft.WPF.Templates.Drafts;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,19 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
                 _NumberOfPlayersPerTeam = value;
                 NotifyPropertyChanged("NumberOfPlayersPerTeam");
             }
+        }
+
+        public IEnumerable<DraftCard> ToData()
+        {
+            return DraftCards.Select(vm =>
+            {
+                return new DraftCard()
+                {
+                    ContractSalary = vm.WeeklySalary,
+                    ContractYears = vm.ContractLength,
+                    MaxCurrentAbility = vm.MaximumAbility
+                };
+            });
         }
     }
 }

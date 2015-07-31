@@ -1,7 +1,9 @@
 ﻿using FMDraft.Library;
 using FMDraft.Library.Entities;
+using FMDraft.WPF.Templates.Drafts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +51,7 @@ namespace FMDraft.WPF.Templates.Team
             set { _City = value; }
         }
 
+        public ObservableCollection<DraftCardViewModel> DraftCards { get; set; }
 
         public FMDraft.Library.Entities.Team ToData()
         {
