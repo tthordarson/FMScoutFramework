@@ -70,9 +70,9 @@ namespace FMDraft.WPF.Templates.Drafts
             }
         }
 
-        private int _MinimumAbility;
+        private int? _MinimumAbility;
 
-        public int MinimumAbility
+        public int? MinimumAbility
         {
             get { return _MinimumAbility; }
             set
@@ -82,15 +82,39 @@ namespace FMDraft.WPF.Templates.Drafts
             }
         }
 
-        private int _MaximumAbility;
+        private int? _MaximumAbility;
 
-        public int MaximumAbility
+        public int? MaximumAbility
         {
             get { return _MaximumAbility; }
             set
             {
                 _MaximumAbility = value;
                 NotifyPropertyChanged("MaximumAbility");
+            }
+        }
+
+        private int? _MinimumAge;
+
+        public int? MinimumAge
+        {
+            get { return _MinimumAge; }
+            set
+            {
+                NotifyPropertyChanged("MinAge");
+                _MinimumAge = value;
+            }
+        }
+
+        private int? _MaximumAge;
+
+        public int? MaximumAge
+        {
+            get { return _MaximumAge; }
+            set
+            { 
+                _MaximumAge = value;
+                NotifyPropertyChanged("MaxAge");
             }
         }
 

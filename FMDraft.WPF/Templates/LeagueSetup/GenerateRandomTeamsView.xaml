@@ -31,9 +31,13 @@
 
             <Label Grid.Row="2" Grid.ColumnSpan="2">Settings across entire board</Label>
 
-            <Label Grid.Row="3"  Grid.ColumnSpan="2">Draft Cards</Label>
+            <Label Grid.Row="3" Grid.Column="0">Number of players per team</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NumberOfPlayersPerTeam}" IsEnabled="{Binding CanGenerateStandardDraftCards}"></TextBox>
             
-            <ItemsControl Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding DraftCards}">
+            <Label Grid.Row="4"  Grid.Column="0">Draft Cards</Label>
+            <Button Grid.Row="4" Grid.Column="1" Command="{Binding GenerateStandardDraftCards}">Generate Standard Draft Cards</Button>
+            
+            <ItemsControl Grid.Row="5" Grid.ColumnSpan="2" ItemsSource="{Binding DraftCards}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -62,6 +66,12 @@
 
                             <Label Grid.Row="4" Grid.Column="0">Maximum Ability</Label>
                             <Label Grid.Row="4" Grid.Column="1" Content="{Binding MaximumAbility}"></Label>
+
+                            <Label Grid.Row="5" Grid.Column="0">Minimum Age</Label>
+                            <Label Grid.Row="5" Grid.Column="1" Content="{Binding MinimumAge}"></Label>
+
+                            <Label Grid.Row="6" Grid.Column="0">Maximum Age</Label>
+                            <Label Grid.Row="6" Grid.Column="1" Content="{Binding MaximumAge}"></Label>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
