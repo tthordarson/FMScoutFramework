@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FMDraft.WPF.Templates.LeagueSetup
+namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 {
     /// <summary>
-    /// Interaction logic for GenerateRandomTeamsView.xaml
+    /// Interaction logic for CitySourcesView.xaml
     /// </summary>
-    public partial class GenerateRandomTeamsView : UserControl
+    public partial class CitySourcesView : UserControl
     {
-        public GenerateRandomTeamsView()
+        public CitySourcesView()
         {
             InitializeComponent();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams.GenerateRandomTeamsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:GenerateDraftCardViewModel}">
+            <local:GenerateDraftCardView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CitySourcesViewModel}">
+            <local:CitySourcesView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        
+            <Label Grid.Column="0" Grid.Row="0">Number of Teams</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding NumberOfTeams}"></TextBox>
+            
+            <Label Grid.Column="0" Grid.Row="1">City sources</Label>
+            <Button Grid.Column="1" Grid.Row="1" Command="{Binding EditCitySources}">Edit</Button>
+            
+            <Separator Grid.Row="2" Grid.ColumnSpan="2" />
+
+            <Label Grid.Row="3" Grid.ColumnSpan="2">Settings across entire board</Label>
+
+            <Label Grid.Row="4"  Grid.Column="0">Draft Cards</Label>
+            <Button Grid.Row="4" Grid.Column="1" Command="{Binding EditDraftCards}">Edit</Button>
+
+        </Grid>
+        <Grid Grid.Column="1">
+            <ContentControl Content="{Binding RightSideViewModel}" />
+        </Grid>
+    </Grid>
+</UserControl>

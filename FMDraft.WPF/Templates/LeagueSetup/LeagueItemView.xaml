@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FMDraft.WPF.Templates.LeagueSetup"
+             xmlns:random="clr-namespace:FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type local:GenerateRandomTeamsViewModel}">
-            <local:GenerateRandomTeamsView />
+        <DataTemplate DataType="{x:Type random:GenerateRandomTeamsViewModel}">
+            <random:GenerateRandomTeamsView />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -47,7 +48,7 @@
             Placement="Center"
             Margin="20"
             IsOpen="{Binding ToggleRandomTeamsPopup}">
-            <Grid Height="300" Width="500" Margin="5" Background="LightGray">
+            <Grid Height="600" Width="1000" Margin="5" Background="LightGreen">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />

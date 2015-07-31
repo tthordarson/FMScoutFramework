@@ -1,6 +1,7 @@
 ﻿using FMDraft.Common.Extensions;
 using FMDraft.Library;
 using FMDraft.Library.Entities;
+using FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams;
 using FMDraft.WPF.Templates.Team;
 using System;
 using System.Collections.Generic;

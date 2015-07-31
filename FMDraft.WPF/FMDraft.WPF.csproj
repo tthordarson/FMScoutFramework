@@ -68,10 +68,18 @@
     </Compile>
     <Compile Include="Templates\DraftPoolViewModel.cs" />
     <Compile Include="Templates\Drafts\DraftCardViewModel.cs" />
-    <Compile Include="Templates\LeagueSetup\GenerateRandomTeamsView.xaml.cs">
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\CitySourcesView.xaml.cs">
+      <DependentUpon>CitySourcesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\CitySourcesViewModel.cs" />
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\GenerateDraftCardView.xaml.cs">
+      <DependentUpon>GenerateDraftCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\GenerateDraftCardViewModel.cs" />
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\GenerateRandomTeamsView.xaml.cs">
       <DependentUpon>GenerateRandomTeamsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Templates\LeagueSetup\GenerateRandomTeamsViewModel.cs" />
+    <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\GenerateRandomTeamsViewModel.cs" />
     <Compile Include="Templates\LeagueSetup\LeagueItemView.xaml.cs">
       <DependentUpon>LeagueItemView.xaml</DependentUpon>
     </Compile>
@@ -105,7 +113,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Templates\LeagueSetup\GenerateRandomTeamsView.xaml">
+    <Page Include="Templates\LeagueSetup\GenerateRandomTeams\CitySourcesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\LeagueSetup\GenerateRandomTeams\GenerateDraftCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\LeagueSetup\GenerateRandomTeams\GenerateRandomTeamsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

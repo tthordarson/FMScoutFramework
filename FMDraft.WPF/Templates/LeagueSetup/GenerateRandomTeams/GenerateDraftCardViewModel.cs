@@ -7,17 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FMDraft.WPF.Templates.LeagueSetup
+namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 {
-    public class GenerateRandomTeamsViewModel : AbstractViewModel
+    public class GenerateDraftCardViewModel : AbstractViewModel
     {
-        public GenerateRandomTeamsViewModel(GameCore core) : base(core)
+        public GenerateDraftCardViewModel(GameCore core): base(core)
         {
             DraftCards = new ObservableCollection<DraftCardViewModel>();
 
+            NumberOfPlayersPerTeam = 20;
+
             GenerateStandardDraftCards = new RelayCommand(() =>
             {
-
+                GenerateRandomDraftCards(NumberOfPlayersPerTeam);
             }, CanGenerateStandardDraftCards);
         }
 
@@ -64,5 +66,17 @@ namespace FMDraft.WPF.Templates.LeagueSetup
         public RelayCommand GenerateStandardDraftCards { get; private set; }
 
         public ObservableCollection<DraftCardViewModel> DraftCards { get; set; }
+
+        private int _NumberOfPlayersPerTeam;
+
+        public int NumberOfPlayersPerTeam
+        {
+            get { return _NumberOfPlayersPerTeam; }
+            set
+            {
+                _NumberOfPlayersPerTeam = value;
+                NotifyPropertyChanged("NumberOfPlayersPerTeam");
+            }
+        }
     }
 }
