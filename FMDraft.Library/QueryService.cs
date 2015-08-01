@@ -22,6 +22,18 @@ namespace FMDraft.Library
             this.mockService = new MockService();
         }
 
+        public IEnumerable<Manager> GetManagers(Func<Manager, bool> filter = null)
+        {
+            var query = mockService.GetManagers();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query;
+        }
+
         public IEnumerable<Nation> GetNations()
         {
             return mockService.GetNations();
@@ -49,6 +61,7 @@ namespace FMDraft.Library
                 {
                     return new Player()
                     {
+                        ID = x.ID,
                         Age = x.Age,
                         Club = x.Club.Name,
                         CurrentAbility = x.CA,

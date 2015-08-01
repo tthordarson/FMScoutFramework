@@ -9,6 +9,7 @@ namespace FMDraft.Library
 {
     public class Player
     {
+        public int ID { get; set; }
         public string FullName { get; set; }
         public string Position { get; set; }
         public string Club { get; set; }

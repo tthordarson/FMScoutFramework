@@ -10,11 +10,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="400*" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Command="{Binding ProcessSelections}">Add selected player to Pool</Button>
-        <ScrollViewer Grid.Row="1">
-            <DataGrid
+        <DataGrid
+                Grid.Row="1"
                 ItemsSource="{Binding SearchedPlayers}"
                 SelectedItem="{Binding SelectedPlayer}"
                 ScrollViewer.CanContentScroll="True" 
@@ -22,15 +22,14 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
                 VerticalAlignment="Stretch"
                 AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
-                    <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
-                    <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
-                    <DataGridTextColumn Header="Club" Binding="{Binding Club}" />
-                    <DataGridTextColumn Header="Current Ability" Binding="{Binding CurrentAbility}" />
-                    <DataGridTextColumn Header="Potential Ability" Binding="{Binding PotentialAbility}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </ScrollViewer>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
+                <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
+                <DataGridTextColumn Header="Club" Binding="{Binding Club}" />
+                <DataGridTextColumn Header="Current Ability" Binding="{Binding CurrentAbility}" />
+                <DataGridTextColumn Header="Potential Ability" Binding="{Binding PotentialAbility}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

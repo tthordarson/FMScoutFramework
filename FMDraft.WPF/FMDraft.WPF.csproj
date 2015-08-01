@@ -91,6 +91,7 @@
       <DependentUpon>LeagueSetupMasterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\LeagueSetup\LeagueSetupMasterViewModel.cs" />
+    <Compile Include="Templates\Manager\ManagerViewModel.cs" />
     <Compile Include="Templates\SelectPlayersView.xaml.cs">
       <DependentUpon>SelectPlayersView.xaml</DependentUpon>
     </Compile>

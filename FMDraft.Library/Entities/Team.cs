@@ -17,6 +17,9 @@ namespace FMDraft.Library.Entities
         public string ForegroundColor { get; set; }
         public string BackgroundColor { get; set; }
 
+        public Manager Manager { get; set; }
+        public ManagerMode ManagerMode { get; set; }
+
         public Team()
         {
             this.DraftCards = new List<DraftCard>();

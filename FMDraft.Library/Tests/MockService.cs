@@ -54,6 +54,14 @@ namespace FMDraft.Library.Tests
             nationCity.Add("Canada", "Quebec");
             nationCity.Add("Canada", "Thunder Bay");
             nationCity.Add("Canada", "Regina");
+            nationCity.Add("Canada", "Scarborough");
+            nationCity.Add("Canada", "Mississauga");
+            nationCity.Add("Canada", "Edmonton");
+            nationCity.Add("Canada", "Hamilton");
+            nationCity.Add("Canada", "Burlington");
+            nationCity.Add("Canada", "London");
+            nationCity.Add("Canada", "Niagara Falls");
+            nationCity.Add("Canada", "Windsor");
 
             // Iceland
             nationCity.Add("Iceland", "Reykjavik");
@@ -86,5 +94,33 @@ namespace FMDraft.Library.Tests
             })
             .OrderBy(x => x.Name);
         }
-    }
+
+        public IEnumerable<Manager> GetManagers()
+        {
+            var list = new List<Manager>();
+
+            list.Add(new Manager() { FullName = "Rafa Benitez", ID = 4203246 });
+            list.Add(new Manager() { FullName = "José Mourinho", ID = 4211801 });
+            list.Add(new Manager() { FullName = "Jürgen Klopp", ID = 9318 });
+            list.Add(new Manager() { FullName = "Frank de Boer", ID = 354 });
+            list.Add(new Manager() { FullName = "Josep Guardiola", ID = 1120 });
+            list.Add(new Manager() { FullName = "Brendan Rodgers", ID = 5112744 });
+            list.Add(new Manager() { FullName = "Arsène Wenger", ID = 2020187 });
+            list.Add(new Manager() { FullName = "Vladimir Weiss", ID = 2016378 });
+            list.Add(new Manager() { FullName = "Pako Ayestarán", ID = 7449882 });
+            list.Add(new Manager() { FullName = "André Villas-Boas", ID = 745487 });
+            list.Add(new Manager() { FullName = "Bruce Arena", ID = 1200621 });
+            list.Add(new Manager() { FullName = "Lucien Favre", ID = 69000919 });
+            list.Add(new Manager() { FullName = "Louis van Gaal", ID = 4200588 });
+            list.Add(new Manager() { FullName = "David Moyes", ID = 2004988 });
+            list.Add(new Manager() { FullName = "Michael Laudrup", ID = 601710 });
+            list.Add(new Manager() { FullName = "Roberto Mancini", ID = 12523 });
+            list.Add(new Manager() { FullName = "Carlo Ancelotti", ID = 20178 });
+            list.Add(new Manager() { FullName = "Unai Emery", ID = 5193 });
+            list.Add(new Manager() { FullName = "Ernesto Valvarede", ID = 9338 });
+            list.Add(new Manager() { FullName = "Rúnar Páll Sigmundsson", ID = 39004216 });
+
+            return list;
+        }
+     }
 }

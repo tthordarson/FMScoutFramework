@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label 
             Grid.Row="0"
@@ -35,6 +35,8 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -49,6 +51,38 @@
 
                     <Label Grid.Row="2" Grid.Column="0">Foreground Color</Label>
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ForegroundColor}" />
+                    
+                    <Label Grid.Row="3" Grid.Column="0">Manager</Label>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Manager.Name}" IsEnabled="False" />
+                    
+                    <Button Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding ToggleEditManager}">Edit Manager</Button>
+                    <Popup
+                        AllowsTransparency="True"
+                        IsOpen="{Binding ToggleEditManagerPopup}"
+                        Height="700"
+                        Width="800">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="400" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0">Human controlled?</Label>
+                            <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding HumanControlled}" />
+                            
+                            <DataGrid Grid.Row="1" Grid.ColumnSpan="2"
+                                      IsEnabled="{Binding !HumanControlled}"
+                                      SelectedItem="{Binding Manager}"
+                                      ItemsSource="{Binding SearchedManagers}">
+                                
+                            </DataGrid>
+                            <Button Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding ToggleEditManager}">OK</Button>
+                        </Grid>
+                    </Popup>
                 </Grid>
             </TabItem>
             <TabItem Header="Draft Cards">

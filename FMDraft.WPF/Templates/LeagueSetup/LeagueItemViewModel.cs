@@ -34,6 +34,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                 TeamViewModels.Clear();
                 TeamViewModels.AddRange(teams.Select(team =>
                 {
+                    var pickNumber = 1;
+
                     return new TeamViewModel(core)
                     {
                         Name = team.Name,
@@ -42,11 +44,9 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                         ForegroundColor = team.ForegroundColor,
                         DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(draftCard =>
                         {
-                            var index = team.DraftCards.IndexOf(draftCard);
-
                             return new DraftCardViewModel(core)
                             {
-                                PickNumber = index,
+                                PickNumber = pickNumber++,
                                 ContractLength = draftCard.ContractYears,
                                 MaximumAbility = draftCard.MaxCurrentAbility,
                                 WeeklySalary = draftCard.ContractSalary
