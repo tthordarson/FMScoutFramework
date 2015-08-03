@@ -30,7 +30,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
             {
                 return new DraftCardViewModel(core)
                 {
-                    PickNumber = pickNumber,
+                    RoundNumber = pickNumber,
                     ContractLength = 5,
                     WeeklySalary = weeklySalary
                 };
@@ -88,7 +88,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
                 {
                     ContractSalary = vm.WeeklySalary,
                     ContractYears = vm.ContractLength,
-                    MaxCurrentAbility = vm.MaximumAbility
+                    MaxCurrentAbility = vm.MaximumAbility,
+                    Round = vm.RoundNumber
                 };
             });
         }

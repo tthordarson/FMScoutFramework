@@ -23,7 +23,6 @@ namespace FMDraft.WPF.Templates.Team
             {
                 return new ManagerViewModel(core)
                 {
-                    HumanControlled = false,
                     ID = x.ID,
                     Name = x.FullName
                 };
@@ -48,6 +47,7 @@ namespace FMDraft.WPF.Templates.Team
             {
                 _Name = value;
                 NotifyPropertyChanged("Name");
+                Changed();
             }
         }
 
@@ -60,6 +60,7 @@ namespace FMDraft.WPF.Templates.Team
             {
                 _ForegroundColor = value;
                 NotifyPropertyChanged("ForegroundColor");
+                Changed();
             }
         }
 
@@ -72,6 +73,7 @@ namespace FMDraft.WPF.Templates.Team
             {
                 _BackgroundColor = value;
                 NotifyPropertyChanged("BackgroundColor");
+                Changed();
             }
         }
 
@@ -84,6 +86,7 @@ namespace FMDraft.WPF.Templates.Team
             {
                 _City = value;
                 NotifyPropertyChanged("City");
+                Changed();
             }
         }
 
@@ -96,9 +99,44 @@ namespace FMDraft.WPF.Templates.Team
             {
                 _Manager = value;
                 NotifyPropertyChanged("Manager");
+                NotifyPropertyChanged("ManagerNameOrDefault");
+                Changed();
             }
         }
 
+        private bool _HumanControlled;
+
+        public bool HumanControlled
+        {
+            get { return _HumanControlled; }
+            set
+            {
+                _HumanControlled = value;
+                NotifyPropertyChanged("HumanControlled");
+
+                if (!value)
+                {
+                    Name = null;
+                    NotifyPropertyChanged("Manager");
+                }
+
+                NotifyPropertyChanged("ManagerNameOrDefault");
+                Changed();
+            }
+        }
+
+        public string ManagerNameOrDefault
+        {
+            get
+            {
+                if (HumanControlled)
+                {
+                    return "Human";
+                }
+
+                return Manager.Name;
+            }
+        }
 
         private bool _ToggleEditManagerPopup;
 
@@ -120,10 +158,34 @@ namespace FMDraft.WPF.Templates.Team
 
         public FMDraft.Library.Entities.Team ToData()
         {
-            return new Library.Entities.Team()
+            var team = new Library.Entities.Team()
             {
-
+                Name = Name,
+                BackgroundColor = BackgroundColor,
+                ForegroundColor = ForegroundColor,
+                City = City,
+                DraftCards = DraftCards.Select(x => x.ToData())
             };
+
+            if (HumanControlled)
+            {
+                team.ManagerMode = ManagerMode.Player;
+            }
+            else
+            {
+                team.ManagerMode = ManagerMode.CPU;
+
+                if (Manager != null)
+                {
+                    team.Manager = new Library.Entities.Manager()
+                    {
+                        ID = Manager.ID,
+                        FullName = Manager.Name
+                    };
+                }
+            }
+
+            return team;
         }
     }
 }

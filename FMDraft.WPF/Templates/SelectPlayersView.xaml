@@ -14,12 +14,9 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Command="{Binding ProcessSelections}">Add selected player to Pool</Button>
         <DataGrid
-                Grid.Row="1"
+            Grid.Row="1"
                 ItemsSource="{Binding SearchedPlayers}"
                 SelectedItem="{Binding SelectedPlayer}"
-                ScrollViewer.CanContentScroll="True" 
-                ScrollViewer.VerticalScrollBarVisibility="Visible"
-                ScrollViewer.HorizontalScrollBarVisibility="Auto"
                 VerticalAlignment="Stretch"
                 AutoGenerateColumns="False">
             <DataGrid.Columns>

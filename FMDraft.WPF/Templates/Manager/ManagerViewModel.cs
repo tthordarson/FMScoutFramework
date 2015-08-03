@@ -27,23 +27,5 @@ namespace FMDraft.WPF.Templates.Manager
                 NotifyPropertyChanged("Name");
             }
         }
-
-        private bool _HumanControlled;
-
-        public bool HumanControlled
-        {
-            get { return _HumanControlled; }
-            set
-            {
-                _HumanControlled = value;
-                NotifyPropertyChanged("HumanControlled");
-
-                if (!value)
-                {
-                    Name = null;
-                    NotifyPropertyChanged("Manager");
-                }
-            }
-        }
     }
 }

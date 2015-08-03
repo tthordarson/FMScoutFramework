@@ -1,4 +1,5 @@
 ﻿using FMDraft.Library;
+using FMDraft.Library.Entities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,24 +16,24 @@ namespace FMDraft.WPF.Templates.Drafts
 
         }
 
-        private int _PickNumber;
+        private int _RoundNumber;
 
-        public int PickNumber
+        public int RoundNumber
         {
-            get { return _PickNumber; }
+            get { return _RoundNumber; }
             set
             {
-                _PickNumber = value;
+                _RoundNumber = value;
                 NotifyPropertyChanged("PickNumber");
                 NotifyPropertyChanged("PickNumberString");
             }
         }
 
-        public string PickNumberString
+        public string RoundNumberString
         {
             get
             {
-                return string.Format("Pick #{0}", PickNumber);
+                return string.Format("Round #{0} Pick", RoundNumber);
             }
         }
 
@@ -117,6 +118,30 @@ namespace FMDraft.WPF.Templates.Drafts
                 NotifyPropertyChanged("MaxAge");
             }
         }
+    }
 
+    public static class DraftCardViewModelExtensions
+    {
+        public static DraftCardViewModel ToViewModel(this DraftCard draftCard, GameCore core)
+        {
+            return new DraftCardViewModel(core)
+            {
+                RoundNumber = draftCard.Round,
+                ContractLength = draftCard.ContractYears,
+                MaximumAbility = draftCard.MaxCurrentAbility,
+                WeeklySalary = draftCard.ContractSalary
+            };
+        }
+
+        public static DraftCard ToData(this DraftCardViewModel viewModel)
+        {
+            return new DraftCard()
+            {
+                ContractSalary = viewModel.WeeklySalary,
+                ContractYears = viewModel.ContractLength,
+                Round = viewModel.RoundNumber,
+                MaxCurrentAbility = viewModel.MaximumAbility
+            };
+        }
     }
 }

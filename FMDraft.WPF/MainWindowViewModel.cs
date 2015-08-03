@@ -1,5 +1,7 @@
 ﻿using FMDraft.Library;
+using FMDraft.Library.Entities;
 using FMDraft.WPF.Templates;
+using FMDraft.WPF.Templates.Drafts;
 using FMDraft.WPF.Templates.LeagueSetup;
 using System;
 using System.Collections.Generic;
@@ -13,20 +15,27 @@ namespace FMDraft.WPF
     public class MainWindowViewModel : AbstractViewModel
     {
         private ConfederationViewModel confederationViewModel;
-        private DraftPoolViewModel draftViewModel;
+        private DraftPoolViewModel draftPoolViewModel;
         private LeagueSetupMasterViewModel leagueSetupViewModel;
+        private DraftMasterViewModel goToDraftViewModel;
 
         public MainWindowViewModel() : base(null)
         {
             this.core = new GameCore();
 
             confederationViewModel = new ConfederationViewModel(core);
-            draftViewModel = new DraftPoolViewModel(core);
+            draftPoolViewModel = new DraftPoolViewModel(core);
             leagueSetupViewModel = new LeagueSetupMasterViewModel(core);
+            goToDraftViewModel = new DraftMasterViewModel(core);
 
             confederationViewModel.PrincipalNationChanged += () =>
             {
                 NotifyPropertyChanged("CanViewLeagueSetup");
+            };
+
+            leagueSetupViewModel.Changed += () =>
+            {
+                NotifyPropertyChanged("IsDraftReady");
             };
 
             NewGame = new RelayCommand(() => {
@@ -79,6 +88,28 @@ namespace FMDraft.WPF
             }
         }
 
+        public bool IsDraftReady
+        {
+            get
+            {
+                var gameState = this.core.GameState;
+
+                if (gameState == null)
+                {
+                    return false;
+                }
+
+                // Truth condition is that there are leagues and every team in every league has been assigned
+                // with draftcards and there is either a human manager or a CPU manager has been assigned
+
+                return gameState.Leagues.Any()
+                    && gameState.Leagues.All(league => league.Teams.Any() && league.Teams.All(team => 
+                    {
+                        return team.DraftCards.Any() && (team.ManagerMode == ManagerMode.Player || team.Manager != null);
+                    }));
+            }
+        }
+
         private TabItem _SelectedTab;
 
         public TabItem SelectedTab
@@ -105,8 +136,11 @@ namespace FMDraft.WPF
                         leagueSetupViewModel.Reload(this.core);
                         return leagueSetupViewModel;
                     case "DraftPoolTab":
-                        draftViewModel.Reload(this.core);
-                        return draftViewModel;
+                        draftPoolViewModel.Reload(this.core);
+                        return draftPoolViewModel;
+                    case "DraftTab":
+                        goToDraftViewModel.Reload(this.core);
+                        return goToDraftViewModel;
                     default:
                         return null;
                 }

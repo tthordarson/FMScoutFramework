@@ -71,6 +71,14 @@
       <DependentUpon>DraftCardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\Drafts\DraftCardViewModel.cs" />
+    <Compile Include="Templates\Drafts\DraftLeagueView.xaml.cs">
+      <DependentUpon>DraftLeagueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Drafts\DraftLeagueViewModel.cs" />
+    <Compile Include="Templates\Drafts\DraftMasterView.xaml.cs">
+      <DependentUpon>DraftMasterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Drafts\DraftMasterViewModel.cs" />
     <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\CitySourcesView.xaml.cs">
       <DependentUpon>CitySourcesView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +129,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\Drafts\DraftCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Drafts\DraftLeagueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Drafts\DraftMasterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

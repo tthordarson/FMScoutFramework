@@ -53,7 +53,7 @@
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ForegroundColor}" />
                     
                     <Label Grid.Row="3" Grid.Column="0">Manager</Label>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Manager.Name}" IsEnabled="False" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ManagerNameOrDefault, Mode=OneWay}" IsEnabled="False" />
                     
                     <Button Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding ToggleEditManager}">Edit Manager</Button>
                     <Popup
@@ -86,15 +86,13 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Draft Cards">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding DraftCards}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Content="{Binding}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                <ItemsControl ItemsSource="{Binding DraftCards}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </TabItem>
         </TabControl>
     </Grid>

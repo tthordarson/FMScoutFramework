@@ -26,29 +26,12 @@ namespace FMDraft.WPF.Templates.LeagueSetup
             });
         }
 
-        private IEnumerable<LeagueItemViewModel> ToViewModels(IEnumerable<League> leagues)
-        {
-            return leagues.Select(league =>
-            {
-                var teams = league.Teams.Select(team =>
-                {
-                    return new TeamViewModel(core)
-                    {
-
-                    };
-                });
-
-                return new LeagueItemViewModel(core)
-                {
-                    Name = league.Name,
-                    TeamViewModels = new ObservableCollection<TeamViewModel>(teams)
-                };
-            });
-        }
+        public event Action Changed = delegate { };
 
         private void UpdateCore()
         {
             core.GameState.Leagues = LeagueItemViews.Select(x => x.ToData());
+            Changed();
         }
 
         public RelayCommand AddLeague { get; private set; }

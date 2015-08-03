@@ -10,6 +10,7 @@ namespace FMDraft.Library.Entities
     public class DraftCard
     {
         public Player Player { get; set; }
+        public int Round { get; set; }
         public int? MaxCurrentAbility { get; set; }
         public int? MaxPotentialAbility { get; set; }
         public int ContractYears { get; set; }

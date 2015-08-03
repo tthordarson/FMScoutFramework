@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding PickNumberString}"></Label>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding RoundNumberString}"></Label>
 
         <Label Grid.Row="1" Grid.Column="0">Weekly Salary</Label>
         <Label Grid.Row="1" Grid.Column="1" Content="{Binding WeeklySalaryString}"></Label>
