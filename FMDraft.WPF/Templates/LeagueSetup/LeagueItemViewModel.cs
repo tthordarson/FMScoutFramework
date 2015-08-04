@@ -176,4 +176,16 @@ namespace FMDraft.WPF.Templates.LeagueSetup
             };
         }
     }
+
+    public static class LeagueItemrViewModelExtensions
+    {
+        public static LeagueItemViewModel ToViewModel(this League league, GameCore core)
+        {
+            return new LeagueItemViewModel(core)
+            {
+                Name = league.Name,
+                TeamViewModels = new ObservableCollection<TeamViewModel>(league.Teams.Select(x => x.ToViewModel(core)))
+            };
+        }
+    }
 }

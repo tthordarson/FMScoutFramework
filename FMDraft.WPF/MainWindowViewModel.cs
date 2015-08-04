@@ -3,11 +3,11 @@ using FMDraft.Library.Entities;
 using FMDraft.WPF.Templates;
 using FMDraft.WPF.Templates.Drafts;
 using FMDraft.WPF.Templates.LeagueSetup;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace FMDraft.WPF
@@ -19,14 +19,14 @@ namespace FMDraft.WPF
         private LeagueSetupMasterViewModel leagueSetupViewModel;
         private DraftMasterViewModel goToDraftViewModel;
 
+        private readonly string fileExtensions = ".fmdraft";
+        private readonly string fileFilter = "FM Draft File|*.fmdraft";
+
         public MainWindowViewModel() : base(null)
         {
             this.core = new GameCore();
 
-            confederationViewModel = new ConfederationViewModel(core);
-            draftPoolViewModel = new DraftPoolViewModel(core);
-            leagueSetupViewModel = new LeagueSetupMasterViewModel(core);
-            goToDraftViewModel = new DraftMasterViewModel(core);
+            InitializeViewModels();
 
             confederationViewModel.PrincipalNationChanged += () =>
             {
@@ -42,6 +42,41 @@ namespace FMDraft.WPF
                 core.Load();
             });
 
+            SaveGame = new RelayCommand(() =>
+            {
+                var dialog = new SaveFileDialog();
+                dialog.DefaultExt = fileExtensions;
+                dialog.Filter = fileFilter;
+                var result = dialog.ShowDialog();
+
+                if (result == true)
+                {
+                    var gameStateJson = JsonConvert.SerializeObject(this.core.GameState, Formatting.Indented);
+                    File.WriteAllText(dialog.FileName, gameStateJson);
+                }
+            });
+
+            LoadGame = new RelayCommand(() =>
+            {
+                var dialog = new OpenFileDialog();
+                dialog.DefaultExt = fileExtensions;
+                dialog.Filter = fileFilter;
+                var result = dialog.ShowDialog();
+
+                if (result == true)
+                {
+                    using (var streamReader = new StreamReader(dialog.FileName))
+                    using (var jsonReader = new JsonTextReader(streamReader))
+                    {
+                        var serializer = new JsonSerializer();
+                        var gameState = serializer.Deserialize<GameState>(jsonReader);
+
+                        core.GameState = gameState;
+                        core.Load();
+                    }
+                }
+            });
+
             QuitProgram = new RelayCommand(() =>
             {
                 QuitProgramCallback();
@@ -51,13 +86,31 @@ namespace FMDraft.WPF
             {
                 LoadFailedCallback();
                 IsGameLoaded = false;
+                NotifyAll();
             };
 
             core.LoadCompleteCallback += () =>
             {
                 LoadCompleteCallback();
                 IsGameLoaded = true;
+                NotifyAll();
             };
+        }
+
+        private void NotifyAll()
+        {
+            NotifyPropertyChanged("CanViewLeagueSetup");
+            NotifyPropertyChanged("SelectedTab");
+            NotifyPropertyChanged("CurrentViewModel");
+            NotifyPropertyChanged("IsDraftReady");
+        }
+
+        private void InitializeViewModels()
+        {
+            confederationViewModel = new ConfederationViewModel(core);
+            draftPoolViewModel = new DraftPoolViewModel(core);
+            leagueSetupViewModel = new LeagueSetupMasterViewModel(core);
+            goToDraftViewModel = new DraftMasterViewModel(core);
         }
 
         public Action LoadCompleteCallback = delegate { };
@@ -65,7 +118,8 @@ namespace FMDraft.WPF
         public Action QuitProgramCallback = delegate { };
 
         public RelayCommand NewGame { get; private set; }
-
+        public RelayCommand SaveGame { get; private set; }
+        public RelayCommand LoadGame { get; private set; }
         public RelayCommand QuitProgram { get; private set; }
 
         private bool _IsGameLoaded;

@@ -41,7 +41,11 @@ namespace FMDraft.Library
             {
                 this.core.LoadData();
                 LoadCompleteCallback();
-                GameState = new GameState();
+
+                if (GameState == null)
+                {
+                    GameState = new GameState();
+                }
             }
             catch
             {

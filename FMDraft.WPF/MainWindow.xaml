@@ -35,6 +35,9 @@
             <MenuItem Header="File">
                 <MenuItem x:Name="New" Header="New" Command="{Binding NewGame}" />
                 <Separator />
+                <MenuItem x:Name="Save" Header="Save Game State" Command="{Binding SaveGame}" IsEnabled="{Binding IsGameLoaded}" />
+                <MenuItem x:Name="Load" Header="Load Game State" Command="{Binding LoadGame}" />
+                <Separator />
                 <MenuItem x:Name="Quit" Header="Quit" Command="{Binding QuitProgram}" />
             </MenuItem>
         </Menu>

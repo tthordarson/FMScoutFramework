@@ -188,4 +188,32 @@ namespace FMDraft.WPF.Templates.Team
             return team;
         }
     }
+
+    public static class TeamViewModelExtensions
+    {
+        public static TeamViewModel ToViewModel(this FMDraft.Library.Entities.Team team, GameCore core)
+        {
+            var vm = new TeamViewModel(core)
+            {
+                BackgroundColor = team.BackgroundColor,
+                ForegroundColor = team.ForegroundColor,
+                City = team.City,
+                Name = team.Name,
+                Manager = new ManagerViewModel(core)
+            };
+
+            if (team.ManagerMode == ManagerMode.CPU && team.Manager != null)
+            {
+                vm.Manager.Name = team.Manager.FullName;
+                vm.Manager.ID = team.Manager.ID;
+            }
+            
+            if (team.ManagerMode == ManagerMode.Player)
+            {
+                vm.HumanControlled = true;
+            }
+
+            return vm;
+        }
+    }
 }
