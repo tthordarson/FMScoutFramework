@@ -54,7 +54,7 @@ namespace FMDraft.Library
             return mockService.GetCities(nation);
         }
 
-        public IEnumerable<Player> GetPlayers(Func<Player, bool> filter = null, Func<Player, bool> orderBy = null)
+        public IEnumerable<Player> GetPlayers(Func<Player, bool> filter = null, bool passive = true)
         {
             var players = core.Players
                 .Select(x =>
@@ -77,12 +77,12 @@ namespace FMDraft.Library
                 players = players.Where(filter);
             }
 
-            if (orderBy != null)
+            if (passive)
             {
-                players = players.OrderBy(orderBy);
+                players = players.Take(configuration.MaxSearchResults);
             }
 
-            return players.Take(configuration.MaxSearchResults);
+            return players;
         }
     }
 }

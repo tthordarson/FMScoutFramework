@@ -114,6 +114,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
                     ContractSalary = vm.WeeklySalary,
                     ContractYears = vm.ContractLength,
                     MaxCurrentAbility = vm.MaximumAbility,
+                    MaxAge = vm.MaximumAge,
                     Round = vm.RoundNumber
                 };
             });

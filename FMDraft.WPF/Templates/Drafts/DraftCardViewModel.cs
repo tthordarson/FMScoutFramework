@@ -102,7 +102,7 @@ namespace FMDraft.WPF.Templates.Drafts
             get { return _MinimumAge; }
             set
             {
-                NotifyPropertyChanged("MinAge");
+                NotifyPropertyChanged("MinimumAge");
                 _MinimumAge = value;
             }
         }
@@ -115,7 +115,7 @@ namespace FMDraft.WPF.Templates.Drafts
             set
             { 
                 _MaximumAge = value;
-                NotifyPropertyChanged("MaxAge");
+                NotifyPropertyChanged("MaximumAge");
             }
         }
     }
@@ -140,7 +140,8 @@ namespace FMDraft.WPF.Templates.Drafts
                 ContractSalary = viewModel.WeeklySalary,
                 ContractYears = viewModel.ContractLength,
                 Round = viewModel.RoundNumber,
-                MaxCurrentAbility = viewModel.MaximumAbility
+                MaxCurrentAbility = viewModel.MaximumAbility,
+                MaxAge = viewModel.MaximumAge
             };
         }
     }

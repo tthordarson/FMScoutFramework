@@ -28,7 +28,46 @@ namespace FMDraft.WPF.Templates
                 //return SelectedPlayer != null;
             });
 
+            AutomateSelections = new RelayCommand(() =>
+            {
+                var draftCards = core.GameState.Leagues.SelectMany(league => league.Teams.SelectMany(team => team.DraftCards));
+
+                int numberOfSeniorPlayersNeeded = draftCards.Count(x => !x.MaxAge.HasValue);
+                int numberOfYouthPlayersNeeded = draftCards.Count(x => x.MaxAge.HasValue);
+
+                // Assumed max age value for simplicity
+                int maxAge = 19;
+
+                for (int i = 0; i < numberOfSeniorPlayersNeeded; i++)
+                {
+                    AddBestAvailablePlayerToPool();
+                }
+
+                for (int i = 0; i < numberOfYouthPlayersNeeded; i++)
+                {
+                    AddBestAvailablePlayerToPool(x => x.Age <= maxAge);
+                }
+            });
+
             Reload(core);
+        }
+
+        private void AddBestAvailablePlayerToPool(Func<Player, bool> extraCriteria = null)
+        {
+            var bestAvailable = core.QueryService.GetPlayers(UnpickedPlayerPredicate);
+
+            if (extraCriteria != null)
+            {
+                bestAvailable = bestAvailable.Where(extraCriteria);
+            }
+
+            PlayersAddedEvent(bestAvailable.OrderByDescending(x => x.CurrentAbility).FirstOrDefault());
+        }
+
+        private bool UnpickedPlayerPredicate(Player player)
+        {
+            var poolIds = core.GameState.DraftPool.AvailablePlayers.Select(x => x.ID);
+            return !poolIds.Contains(player.ID);
         }
 
         public override void Reload(GameCore core)
@@ -37,9 +76,16 @@ namespace FMDraft.WPF.Templates
 
             if (IsLoaded)
             {
-                SearchedPlayers = new ObservableCollection<Player>(core.QueryService.GetPlayers());
+                var players = core.QueryService.GetPlayers(passive: false)
+                    .Where(UnpickedPlayerPredicate)
+                    .OrderByDescending(x => x.CurrentAbility)
+                    .Take(200);
+
+                SearchedPlayers = new ObservableCollection<Player>(players);
             }
         }
+
+        public RelayCommand AutomateSelections { get; private set; }
 
         public RelayCommand ProcessSelections { get; private set; }
 
