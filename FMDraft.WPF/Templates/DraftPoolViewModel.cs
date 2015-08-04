@@ -33,9 +33,9 @@ namespace FMDraft.WPF.Templates
             };
 
             SearchPlayerViewModel = new SelectPlayersViewModel(core);
-            SearchPlayerViewModel.PlayersAddedEvent += (player) =>
+            SearchPlayerViewModel.PlayersAddedEvent += (players) =>
             {
-                AvailablePlayers.Add(player);
+                AvailablePlayers.AddRange(players);
             };
         }
 
@@ -43,7 +43,6 @@ namespace FMDraft.WPF.Templates
         {
             base.Reload(core);
 
-            // Disabled until proper selection controls can be implemented
             AvailablePlayers.Clear();
 
             if (IsLoaded)

@@ -17,19 +17,6 @@ namespace FMDraft.WPF.Templates
 
         public SelectPlayersViewModel(GameCore core) : base(core)
         {
-            ProcessSelections = new RelayCommand(() =>
-            {
-                if (SelectedPlayer != null)
-                {
-                    PlayersAddedEvent(selectedPlayer);
-                    SearchedPlayers.Remove(selectedPlayer);
-                }
-            }, () =>
-            {
-                return true;
-                //return SelectedPlayer != null;
-            });
-
             AutomateSelections = new RelayCommand(() =>
             {
                 var draftCards = core.GameState.Leagues.SelectMany(league => league.Teams.SelectMany(team => team.DraftCards));
@@ -42,20 +29,20 @@ namespace FMDraft.WPF.Templates
                 // Assumed max age value for simplicity
                 int maxAge = 19;
 
-                // BEGIN REWRITE HERE
-                // Update QueryService.GetPlayers to take as argument Number of results. Use that to get all
-                // best available players in one call.
-                for (int i = 0; i < numberOfSeniorPlayersNeeded; i++)
-                {
-                    AddBestAvailablePlayerToPool();
-                }
+                var bestAvailablePlayers = core.QueryService.GetPlayers(passive: false)
+                    .OrderByDescending(x => x.CurrentAbility)
+                    .Take(numberOfSeniorPlayersNeeded);
 
-                // Repeat above here using as argument that they haven't been added before
-                for (int i = 0; i < numberOfYouthPlayersNeeded; i++)
-                {
-                    AddBestAvailablePlayerToPool(x => x.Age <= maxAge);
-                }
-                // END REWRITE HERE
+                PickedPlayerIds.AddRange(bestAvailablePlayers.Select(x => x.ID));
+                PlayersAddedEvent(bestAvailablePlayers);
+
+                var bestAvailableYoungPlayers = core.QueryService.GetPlayers(passive: false, filter: UnpickedPlayerPredicate)
+                    .Where(x => x.Age <= maxAge)
+                    .OrderByDescending(x => x.CurrentAbility)
+                    .Take(numberOfYouthPlayersNeeded);
+
+                PickedPlayerIds.AddRange(bestAvailableYoungPlayers.Select(x => x.ID));
+                PlayersAddedEvent(bestAvailableYoungPlayers);
             });
 
             Reload(core);
@@ -63,40 +50,9 @@ namespace FMDraft.WPF.Templates
             PickedPlayerIds = new List<int>();
         }
 
-        private void AddBestAvailablePlayerToPool(Func<Player, bool> extraCriteria = null)
-        {
-            var bestAvailable = core.QueryService.GetPlayers(passive: false, filter: UnpickedPlayerPredicate);
-
-            if (extraCriteria != null)
-            {
-                bestAvailable = bestAvailable.Where(extraCriteria);
-            }
-
-            var pickedPlayer = bestAvailable.OrderByDescending(x => x.CurrentAbility).FirstOrDefault();
-
-            PickedPlayerIds.Add(pickedPlayer.ID);
-
-            PlayersAddedEvent(pickedPlayer);
-        }
-
         private bool UnpickedPlayerPredicate(Player player)
         {
             return !PickedPlayerIds.Contains(player.ID);
-        }
-
-        public override void Reload(GameCore core)
-        {
-            base.Reload(core);
-
-            if (IsLoaded)
-            {
-                var players = core.QueryService.GetPlayers(passive: false)
-                    .Where(UnpickedPlayerPredicate)
-                    .OrderByDescending(x => x.CurrentAbility)
-                    .Take(200);
-
-                SearchedPlayers = new ObservableCollection<Player>(players);
-            }
         }
 
         public RelayCommand AutomateSelections { get; private set; }
@@ -116,7 +72,7 @@ namespace FMDraft.WPF.Templates
             }
         }
 
-        public event Action<Player> PlayersAddedEvent = delegate { };
+        public event Action<IEnumerable<Player>> PlayersAddedEvent = delegate { };
 
         public ObservableCollection<Player> SearchedPlayers { get; set; }
     }
