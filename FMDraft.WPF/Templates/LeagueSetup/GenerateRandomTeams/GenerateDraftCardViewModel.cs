@@ -17,46 +17,59 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
             DraftCards = new ObservableCollection<DraftCardViewModel>();
 
             NumberOfPlayersPerTeam = 20;
+            NumberOfYouthPlayersPerTeam = 14;
 
             GenerateStandardDraftCards = new RelayCommand(() =>
             {
-                GenerateRandomDraftCards(NumberOfPlayersPerTeam);
+                GenerateRandomDraftCards(NumberOfPlayersPerTeam, NumberOfYouthPlayersPerTeam);
             }, CanGenerateStandardDraftCards);
         }
 
-        public void GenerateRandomDraftCards(int howMany)
+        public void GenerateRandomDraftCards(int howMany, int howManyYouth)
         {
-            Func<int, int, DraftCardViewModel> generateBasicDraftCard = (pickNumber, weeklySalary) =>
-            {
-                return new DraftCardViewModel(core)
-                {
-                    RoundNumber = pickNumber,
-                    ContractLength = 5,
-                    WeeklySalary = weeklySalary
-                };
-            };
-
-            DraftCards.Add(generateBasicDraftCard(1, 350000));
-            DraftCards.Add(generateBasicDraftCard(2, 250000));
-            DraftCards.Add(generateBasicDraftCard(3, 200000));
-            DraftCards.Add(generateBasicDraftCard(4, 180000));
-            DraftCards.Add(generateBasicDraftCard(5, 150000));
-            DraftCards.Add(generateBasicDraftCard(6, 120000));
-            DraftCards.Add(generateBasicDraftCard(7, 100000));
-            DraftCards.Add(generateBasicDraftCard(8, 100000));
-            DraftCards.Add(generateBasicDraftCard(9, 100000));
-            DraftCards.Add(generateBasicDraftCard(10, 100000));
-            DraftCards.Add(generateBasicDraftCard(11, 90000));
-            DraftCards.Add(generateBasicDraftCard(12, 80000));
-            DraftCards.Add(generateBasicDraftCard(13, 70000));
-            DraftCards.Add(generateBasicDraftCard(14, 70000));
-            DraftCards.Add(generateBasicDraftCard(15, 60000));
-            DraftCards.Add(generateBasicDraftCard(16, 50000));
+            DraftCards.Add(GenerateBasicDraftCard(1, 350000));
+            DraftCards.Add(GenerateBasicDraftCard(2, 250000));
+            DraftCards.Add(GenerateBasicDraftCard(3, 200000));
+            DraftCards.Add(GenerateBasicDraftCard(4, 180000));
+            DraftCards.Add(GenerateBasicDraftCard(5, 150000));
+            DraftCards.Add(GenerateBasicDraftCard(6, 120000));
+            DraftCards.Add(GenerateBasicDraftCard(7, 100000));
+            DraftCards.Add(GenerateBasicDraftCard(8, 100000));
+            DraftCards.Add(GenerateBasicDraftCard(9, 100000));
+            DraftCards.Add(GenerateBasicDraftCard(10, 100000));
+            DraftCards.Add(GenerateBasicDraftCard(11, 90000));
+            DraftCards.Add(GenerateBasicDraftCard(12, 80000));
+            DraftCards.Add(GenerateBasicDraftCard(13, 70000));
+            DraftCards.Add(GenerateBasicDraftCard(14, 70000));
+            DraftCards.Add(GenerateBasicDraftCard(15, 60000));
+            DraftCards.Add(GenerateBasicDraftCard(16, 50000));
 
             for (int i = 17; i <= howMany; i++)
             {
-                DraftCards.Add(generateBasicDraftCard(i, 40000));
+                DraftCards.Add(GenerateBasicDraftCard(i, 40000));
             }
+
+            for (int i = howMany + 1; i <= howManyYouth + howMany; i++)
+            {
+                DraftCards.Add(GenerateBasicDraftCard(i, 2000, 19));
+            }
+        }
+
+        private DraftCardViewModel GenerateBasicDraftCard(int pickNumber, int weeklySalary, int? maxAge = null)
+        {
+            var vm = new DraftCardViewModel(core)
+            {
+                RoundNumber = pickNumber,
+                ContractLength = 5,
+                WeeklySalary = weeklySalary
+            };
+
+            if (maxAge.HasValue)
+            {
+                vm.MaximumAge = maxAge.Value;
+            }
+
+            return vm;
         }
 
         public bool CanGenerateStandardDraftCards()
@@ -77,6 +90,18 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
             {
                 _NumberOfPlayersPerTeam = value;
                 NotifyPropertyChanged("NumberOfPlayersPerTeam");
+            }
+        }
+
+        private int _NumberOfYouthPlayersPerTeam;
+
+        public int NumberOfYouthPlayersPerTeam
+        {
+            get { return _NumberOfYouthPlayersPerTeam; }
+            set
+            {
+                _NumberOfYouthPlayersPerTeam = value;
+                NotifyPropertyChanged("NumberOfYouthPlayersPerTeam");
             }
         }
 
