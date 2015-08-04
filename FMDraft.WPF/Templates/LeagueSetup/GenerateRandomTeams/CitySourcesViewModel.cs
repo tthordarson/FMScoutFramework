@@ -20,7 +20,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
             CityCount = new ObservableCollection<Pair<City, int>>();
 
-            SearchAndAddCity = new RelayCommand(() => 
+            SearchAndAddCity = new RelayCommand(() =>
             {
                 var nation = core.GameState.PrincipalNation;
 
@@ -34,6 +34,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
                     SearchCityName = "";
                     NotifyPropertyChanged("SearchCityName");
                     NotifyPropertyChanged("CityCount");
+                    NotifyPropertyChanged("TeamCountValidatorText");
+                    NotifyPropertyChanged("TeamCountValidatorTextColor");
                 }
             });
         }
@@ -66,5 +68,49 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
             }
         }
 
+        public int CalculateTeamCountDifference()
+        {
+            int teamCount = CityCount.Sum(x => x.Item2);
+
+            return numberOfTeams - teamCount;
+        }
+
+        public string TeamCountValidatorText
+        {
+            get
+            {
+                int difference = CalculateTeamCountDifference();
+
+                if (difference > 0)
+                {
+                    return string.Format("You need to add {0} more teams", difference);
+                }
+                else if (difference < 0)
+                {
+                    return string.Format("You have {0} too many teams", Math.Abs(difference));
+                }
+                else
+                {
+                    return string.Format("Valid number of teams");
+                }
+            }
+        }
+
+        public string TeamCountValidatorTextColor
+        {
+            get
+            {
+                int difference = CalculateTeamCountDifference();
+
+                if (difference == 0)
+                {
+                    return "#000000";
+                }
+                else
+                {
+                    return "#ff0000";
+                }
+            }
+        }
     }
 }

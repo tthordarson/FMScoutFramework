@@ -129,6 +129,9 @@ namespace FMDraft.WPF.Templates.Drafts
                 RoundNumber = draftCard.Round,
                 ContractLength = draftCard.ContractYears,
                 MaximumAbility = draftCard.MaxCurrentAbility,
+                MaximumAge = draftCard.MaxAge,
+                MinimumAbility = draftCard.MinCurrentAbility,
+                MinimumAge = draftCard.MinAge,
                 WeeklySalary = draftCard.ContractSalary
             };
         }

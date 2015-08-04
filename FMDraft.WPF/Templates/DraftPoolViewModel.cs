@@ -43,6 +43,7 @@ namespace FMDraft.WPF.Templates
         {
             base.Reload(core);
 
+            // Disabled until proper selection controls can be implemented
             AvailablePlayers.Clear();
 
             if (IsLoaded)

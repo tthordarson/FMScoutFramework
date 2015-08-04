@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <Label Grid.Row="0" Grid.Column="0">City Name</Label>
@@ -36,5 +37,6 @@
                 <DataGridTextColumn Header="Count" Binding="{Binding Item2, Mode=TwoWay}" IsReadOnly="False" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label Grid.Row="4" Grid.ColumnSpan="4" Margin="10" Content="{Binding TeamCountValidatorText}" Foreground="{Binding TeamCountValidatorTextColor}" />
     </Grid>
 </UserControl>
