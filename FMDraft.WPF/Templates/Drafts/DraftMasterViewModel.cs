@@ -1,4 +1,5 @@
-﻿using FMDraft.Library;
+﻿using FMDraft.Common.Extensions;
+using FMDraft.Library;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ namespace FMDraft.WPF.Templates.Drafts
     {
         public DraftMasterViewModel(GameCore core) : base(core)
         {
-
+            DraftLeagueItems = new ObservableCollection<DraftLeagueViewModel>();
         }
 
         public override void Reload(GameCore core)
@@ -20,7 +21,8 @@ namespace FMDraft.WPF.Templates.Drafts
             base.Reload(core);
             if (IsLoaded)
             {
-                DraftLeagueItems = new ObservableCollection<DraftLeagueViewModel>(core.GameState.Leagues.Select(x => x.ToViewModel(core)));
+                DraftLeagueItems.Clear();
+                DraftLeagueItems.AddRange(core.GameState.Leagues.Select(x => x.ToViewModel(core)));
             }
         }
 

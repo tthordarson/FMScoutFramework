@@ -27,7 +27,7 @@ namespace FMDraft.Library
         {
             return new Team()
             {
-                Name = teamNames.GetRandom(city.Name),
+                Name = teamNames.GetRandomString(city.Name),
                 BackgroundColor = GetRandomColor(),
                 ForegroundColor = GetRandomColor(),
                 City = city,
@@ -43,13 +43,23 @@ namespace FMDraft.Library
             return color;
         }
 
-        private static string GetRandom(this string[] pool, params string[] arguments)
+        public static T GetRandom<T>(this IEnumerable<T> list)
         {
-            var rnd = GetNextRandomInstance();
-            var index = rnd.Next(0, pool.Length);
-            var randomString = pool[index];
+            if (!list.Any())
+            {
+                return default(T);
+            }
 
-            return string.Format(randomString, arguments);
+            var rnd = GetNextRandomInstance();
+            var index = rnd.Next(0, list.Count());
+            var randomItem = list.ElementAt(index);
+
+            return randomItem;
+        }
+
+        private static string GetRandomString(this string[] pool, params string[] arguments)
+        {
+            return string.Format(pool.GetRandom(), arguments);
         }
 
         private static Random GetNextRandomInstance()

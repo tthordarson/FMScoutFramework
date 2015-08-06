@@ -10,21 +10,24 @@ namespace FMDraft.WPF.Templates.Drafts
 {
     public class DraftLeagueViewModel : AbstractViewModel
     {
-        public DraftLeagueViewModel(GameCore core): base(core)
+        private League league;
+
+        public DraftLeagueViewModel(GameCore core, League league): base(core)
         {
-
+            this.league = league;
+            ChildViews.Add(new DraftLotteryViewModel(core, league));
         }
-
-        private string _Name;
 
         public string Name
         {
-            get { return _Name; }
-            set
+            get
             {
-                _Name = value;
-                NotifyPropertyChanged("Name");
-                NotifyPropertyChanged("NameOrDefault");
+                if (league == null)
+                {
+                    return string.Empty;
+                }
+
+                return league.Name;
             }
         }
 
@@ -46,10 +49,7 @@ namespace FMDraft.WPF.Templates.Drafts
     {
         public static DraftLeagueViewModel ToViewModel(this League league, GameCore core)
         {
-            return new DraftLeagueViewModel(core)
-            {
-                Name = league.Name
-            };
+            return new DraftLeagueViewModel(core, league);
         }
     }
 }

@@ -138,6 +138,32 @@ namespace FMDraft.WPF.Templates.Team
             }
         }
 
+        private int _DraftOrder;
+
+        public int DraftOrder
+        {
+            get { return _DraftOrder; }
+            set
+            {
+                _DraftOrder = value;
+                NotifyPropertyChanged("DraftOrder");
+                NotifyPropertyChanged("DraftOrderOrDefault");
+            }
+        }
+
+        public string DraftOrderOrDefault
+        {
+            get
+            {
+                if (DraftOrder == 0)
+                {
+                    return "-";
+                }
+
+                return DraftOrder.ToString();
+            }
+        }
+
         private bool _ToggleEditManagerPopup;
 
         public bool ToggleEditManagerPopup

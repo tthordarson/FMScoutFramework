@@ -1,6 +1,7 @@
 ﻿using FMDraft.Library;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,27 @@ namespace FMDraft.WPF.Templates
                     Reload(core);
                 };
             }
+
+            ViewHeading = "Abstract View";
+            ChildViews = new ObservableCollection<AbstractViewModel>();
+            SelectedChildView = null;
         }
+
+        private AbstractViewModel _SelectedChildView;
+
+        public AbstractViewModel SelectedChildView
+        {
+            get { return _SelectedChildView; }
+            set
+            {
+                _SelectedChildView = value;
+                NotifyPropertyChanged("SelectedChildView");
+            }
+        }
+
+        public ObservableCollection<AbstractViewModel> ChildViews { get; set; }
+
+        public string ViewHeading { get; set; }
 
         public void NotifyPropertyChanged(string propertyName)
         {

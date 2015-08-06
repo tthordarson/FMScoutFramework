@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomElements\BindableMultiSelectDataGrid.cs" />
+    <Compile Include="CustomElements\SortedObservableCollection.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Templates\AbstractViewModel.cs" />
@@ -79,6 +80,10 @@
       <DependentUpon>DraftLeagueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\Drafts\DraftLeagueViewModel.cs" />
+    <Compile Include="Templates\Drafts\DraftLotteryView.xaml.cs">
+      <DependentUpon>DraftLotteryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Drafts\DraftLotteryViewModel.cs" />
     <Compile Include="Templates\Drafts\DraftMasterView.xaml.cs">
       <DependentUpon>DraftMasterView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\Drafts\DraftLeagueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Drafts\DraftLotteryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
