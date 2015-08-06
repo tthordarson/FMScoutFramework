@@ -33,7 +33,7 @@ namespace FMDraft.WPF.Templates.Drafts
         {
             get
             {
-                return string.Format("Round #{0} Pick", RoundNumber);
+                return string.Format("Round #{0} Pick - {1} Team", RoundNumber, TeamType.ToString());
             }
         }
 
@@ -118,6 +118,19 @@ namespace FMDraft.WPF.Templates.Drafts
                 NotifyPropertyChanged("MaximumAge");
             }
         }
+
+        private TeamType _TeamType;
+
+        public TeamType TeamType
+        {
+            get { return _TeamType; }
+            set
+            {
+                _TeamType = value;
+                NotifyPropertyChanged("TeamType");
+            }
+        }
+
     }
 
     public static class DraftCardViewModelExtensions
@@ -132,7 +145,8 @@ namespace FMDraft.WPF.Templates.Drafts
                 MaximumAge = draftCard.MaxAge,
                 MinimumAbility = draftCard.MinCurrentAbility,
                 MinimumAge = draftCard.MinAge,
-                WeeklySalary = draftCard.ContractSalary
+                WeeklySalary = draftCard.ContractSalary,
+                TeamType = draftCard.TeamType
             };
         }
 
@@ -144,7 +158,8 @@ namespace FMDraft.WPF.Templates.Drafts
                 ContractYears = viewModel.ContractLength,
                 Round = viewModel.RoundNumber,
                 MaxCurrentAbility = viewModel.MaximumAbility,
-                MaxAge = viewModel.MaximumAge
+                MaxAge = viewModel.MaximumAge,
+                TeamType = viewModel.TeamType
             };
         }
     }

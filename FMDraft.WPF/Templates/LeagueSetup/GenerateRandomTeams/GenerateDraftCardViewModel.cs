@@ -51,17 +51,18 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
             for (int i = howMany + 1; i <= howManyYouth + howMany; i++)
             {
-                DraftCards.Add(GenerateBasicDraftCard(i, 2000, 19));
+                DraftCards.Add(GenerateBasicDraftCard(i, 2000, maxAge: 19, teamType: TeamType.Youth));
             }
         }
 
-        private DraftCardViewModel GenerateBasicDraftCard(int pickNumber, int weeklySalary, int? maxAge = null)
+        private DraftCardViewModel GenerateBasicDraftCard(int pickNumber, int weeklySalary, int? maxAge = null, TeamType teamType = TeamType.Senior)
         {
             var vm = new DraftCardViewModel(core)
             {
                 RoundNumber = pickNumber,
                 ContractLength = 5,
-                WeeklySalary = weeklySalary
+                WeeklySalary = weeklySalary,
+                TeamType = teamType
             };
 
             if (maxAge.HasValue)
@@ -107,17 +108,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
         public IEnumerable<DraftCard> ToData()
         {
-            return DraftCards.Select(vm =>
-            {
-                return new DraftCard()
-                {
-                    ContractSalary = vm.WeeklySalary,
-                    ContractYears = vm.ContractLength,
-                    MaxCurrentAbility = vm.MaximumAbility,
-                    MaxAge = vm.MaximumAge,
-                    Round = vm.RoundNumber
-                };
-            });
+            return DraftCards.Select(vm => vm.ToData());
         }
     }
 }

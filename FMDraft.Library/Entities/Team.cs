@@ -25,4 +25,11 @@ namespace FMDraft.Library.Entities
             this.DraftCards = new List<DraftCard>();
         }
     }
+
+    public enum TeamType
+    {
+        Senior,
+        Reserve,
+        Youth
+    }
 }

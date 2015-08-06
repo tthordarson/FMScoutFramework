@@ -19,5 +19,6 @@ namespace FMDraft.Library.Entities
         public int? MinAge { get; set; }
         public int ContractYears { get; set; }
         public int ContractSalary { get; set; }
+        public TeamType TeamType { get; set; }
     }
 }
