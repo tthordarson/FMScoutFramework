@@ -60,6 +60,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomElements\BindableMultiSelectDataGrid.cs" />
+    <Compile Include="CustomElements\CustomSortBehaviour.cs" />
+    <Compile Include="CustomElements\ICustomSorter.cs" />
+    <Compile Include="CustomElements\NaturalGreaterThanZeroSorter.cs" />
     <Compile Include="CustomElements\SortedObservableCollection.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="RelayCommand.cs" />

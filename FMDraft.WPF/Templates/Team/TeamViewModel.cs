@@ -148,6 +148,20 @@ namespace FMDraft.WPF.Templates.Team
                 _DraftOrder = value;
                 NotifyPropertyChanged("DraftOrder");
                 NotifyPropertyChanged("DraftOrderOrDefault");
+                NotifyPropertyChanged("DraftOrderSort");
+            }
+        }
+
+        public int DraftOrderSort
+        {
+            get
+            {
+                if (DraftOrder == 0)
+                {
+                    return Int32.MaxValue;
+                }
+
+                return DraftOrder;
             }
         }
 
