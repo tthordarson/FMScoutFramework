@@ -15,7 +15,10 @@ namespace FMDraft.WPF.Templates.Drafts
         public DraftLeagueViewModel(GameCore core, League league): base(core)
         {
             this.league = league;
-            ChildViews.Add(new DraftLotteryViewModel(core, league));
+
+            var draftLotteryVm = new DraftLotteryViewModel(core, league);
+
+            ChildViews.Add(draftLotteryVm);
         }
 
         public string Name

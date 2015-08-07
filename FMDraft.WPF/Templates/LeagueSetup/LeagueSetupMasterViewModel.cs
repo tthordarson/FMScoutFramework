@@ -26,13 +26,6 @@ namespace FMDraft.WPF.Templates.LeagueSetup
             });
         }
 
-        public override void Reload(GameCore core)
-        {
-            base.Reload(core);
-            //LeagueItemViews.Clear();
-            //LeagueItemViews.AddRange(core.GameState.Leagues.Select(x => x.ToViewModel(core)));
-        }
-
         public event Action Changed = delegate { };
 
         private void UpdateCore()

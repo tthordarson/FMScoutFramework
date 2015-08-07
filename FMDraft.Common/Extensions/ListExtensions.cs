@@ -34,5 +34,24 @@ namespace FMDraft.Common.Extensions
             }
             return -1;
         }
+
+        public static void ReplaceElement<T>(this IList<T> list, T oldElement, T newElement)
+        {
+            int index = list.IndexOf(oldElement);
+
+            if (index < 0)
+            {
+                return;
+            }
+
+            list.Insert(index, newElement);
+            list.Remove(oldElement);
+        }
+
+        public static void ReplaceElement<T>(this IList<T> list, T newElement, Func<T, bool> predicate)
+        {
+            var oldElement = list.FirstOrDefault(predicate);
+            list.ReplaceElement(oldElement, newElement);
+        }
     }
 }

@@ -35,7 +35,8 @@ namespace FMDraft.WPF.Templates.Drafts
                     nextPickNumber++;
                     Teams.UpdateCollection();
                 }
-                else
+
+                if (Teams.All(x => x.DraftOrder > 0))
                 {
                     UpdateLeague();
                 }
@@ -44,7 +45,17 @@ namespace FMDraft.WPF.Templates.Drafts
 
         private void UpdateLeague()
         {
-            league.Teams = Teams.Select(team => team.ToData());
+            var teams = Teams.Select(team => team.ToData());
+
+            league.Teams = teams;
+
+            var oldLeague = core.GameState.Leagues.FirstOrDefault(x => x.Name == league.Name);
+
+            var leagues = core.GameState.Leagues.ToList();
+
+            leagues.ReplaceElement(oldLeague, league);
+
+            core.GameState.Leagues = leagues;
         }
 
         public RelayCommand NextDraw { get; set; }

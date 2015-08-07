@@ -203,6 +203,7 @@ namespace FMDraft.WPF.Templates.Team
                 Name = Name,
                 BackgroundColor = BackgroundColor,
                 ForegroundColor = ForegroundColor,
+                DraftOrder = DraftOrder,
                 City = City,
                 DraftCards = DraftCards.Select(x => x.ToData())
             };
@@ -239,6 +240,7 @@ namespace FMDraft.WPF.Templates.Team
                 ForegroundColor = team.ForegroundColor,
                 City = team.City,
                 Name = team.Name,
+                DraftOrder = team.DraftOrder,
                 Manager = new ManagerViewModel(core)
             };
 
@@ -251,6 +253,11 @@ namespace FMDraft.WPF.Templates.Team
             if (team.ManagerMode == ManagerMode.Player)
             {
                 vm.HumanControlled = true;
+            }
+
+            if (team.DraftCards != null)
+            {
+                vm.DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(x => x.ToViewModel(core)));
             }
 
             return vm;
