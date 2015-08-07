@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FMDraft.WPF.Templates"
+             xmlns:playerdraft="clr-namespace:FMDraft.WPF.Templates.Drafts.PlayerDraft"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -22,16 +23,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0">Players in Draft</Label>
-        <DataGrid ItemsSource="{Binding AvailablePlayers}" Grid.Column="0" Grid.Row="1" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
-                <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
-                <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
-                <DataGridTextColumn Header="Club" Binding="{Binding Club}" />
-                <DataGridTextColumn Header="Current Ability" Binding="{Binding CurrentAbility}" />
-                <DataGridTextColumn Header="Potential Ability" Binding="{Binding PotentialAbility}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <playerdraft:AvailablePlayersView Grid.Column="0" Grid.Row="1" DataContext="{Binding AvailablePlayers}" />
 
         <Label Grid.Column="1" Grid.Row="0" x:Name="AddPlayersToPoolGrid">Player Filter</Label>
         <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding SearchPlayerViewModel}" />

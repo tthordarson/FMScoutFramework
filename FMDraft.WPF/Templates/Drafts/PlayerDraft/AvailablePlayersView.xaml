@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="FMDraft.WPF.Templates.Drafts.PlayerDraft.AvailablePlayersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FMDraft.WPF.Templates.Drafts.PlayerDraft"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid ItemsSource="{Binding}" Grid.Column="0" Grid.Row="1" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
+                <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
+                <DataGridTextColumn Header="Club" Binding="{Binding Club}" />
+                <DataGridTextColumn Header="Current Ability" Binding="{Binding CurrentAbility}" />
+                <DataGridTextColumn Header="Potential Ability" Binding="{Binding PotentialAbility}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

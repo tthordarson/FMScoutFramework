@@ -88,6 +88,17 @@
       <DependentUpon>DraftMasterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\Drafts\DraftMasterViewModel.cs" />
+    <Compile Include="Templates\Drafts\PlayerDraft\AvailablePlayersView.xaml.cs">
+      <DependentUpon>AvailablePlayersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Drafts\PlayerDraft\PlayerDraftMasterView.xaml.cs">
+      <DependentUpon>PlayerDraftMasterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Drafts\PlayerDraft\PlayerDraftMasterViewModel.cs" />
+    <Compile Include="Templates\Drafts\PlayerDraft\PlayerDraftRoundView.xaml.cs">
+      <DependentUpon>PlayerDraftRoundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Drafts\PlayerDraft\PlayerDraftRoundViewModel.cs" />
     <Compile Include="Templates\LeagueSetup\GenerateRandomTeams\CitySourcesView.xaml.cs">
       <DependentUpon>CitySourcesView.xaml</DependentUpon>
     </Compile>
@@ -113,6 +124,9 @@
       <DependentUpon>SelectPlayersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\SelectPlayersViewModel.cs" />
+    <Compile Include="Templates\Team\PlayersView.xaml.cs">
+      <DependentUpon>PlayersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Team\TeamView.xaml.cs">
       <DependentUpon>TeamView.xaml</DependentUpon>
     </Compile>
@@ -153,6 +167,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Templates\Drafts\PlayerDraft\AvailablePlayersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Drafts\PlayerDraft\PlayerDraftMasterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Drafts\PlayerDraft\PlayerDraftRoundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Templates\LeagueSetup\GenerateRandomTeams\CitySourcesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\SelectPlayersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Team\PlayersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

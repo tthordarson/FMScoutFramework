@@ -1,5 +1,6 @@
 ﻿using FMDraft.Library;
 using FMDraft.Library.Entities;
+using FMDraft.WPF.Templates.Drafts.PlayerDraft;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace FMDraft.WPF.Templates.Drafts
             this.league = league;
 
             var draftLotteryVm = new DraftLotteryViewModel(core, league);
+            var playerDraftVm = new PlayerDraftMasterViewModel(core);
 
             ChildViews.Add(draftLotteryVm);
         }
