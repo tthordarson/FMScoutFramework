@@ -18,9 +18,9 @@ namespace FMDraft.WPF.Templates.Team
     /// <summary>
     /// Interaction logic for PlayersView.xaml
     /// </summary>
-    public partial class PlayersView : UserControl
+    public partial class TeamDraftView : UserControl
     {
-        public PlayersView()
+        public TeamDraftView()
         {
             InitializeComponent();
         }

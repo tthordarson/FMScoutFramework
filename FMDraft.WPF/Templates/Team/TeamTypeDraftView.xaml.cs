@@ -1,5 +1,4 @@
-﻿using FMDraft.Library;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
+namespace FMDraft.WPF.Templates.Team
 {
     /// <summary>
-    /// Interaction logic for AvailablePlayersView.xaml
+    /// Interaction logic for TeamTypeDraftView.xaml
     /// </summary>
-    public partial class AvailablePlayersView : UserControl
+    public partial class TeamTypeDraftView : UserControl
     {
-        public AvailablePlayersView()
+        public TeamTypeDraftView()
         {
             InitializeComponent();
         }

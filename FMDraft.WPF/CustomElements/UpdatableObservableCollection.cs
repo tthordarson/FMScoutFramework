@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FMDraft.WPF.CustomElements
 {
-    public class SortedObservableCollection<T> : ObservableCollection<T>
+    public class UpdatableObservableCollection<T> : ObservableCollection<T>
     {
-        public SortedObservableCollection(IEnumerable<T> initialData): base(initialData)
+        public UpdatableObservableCollection(IEnumerable<T> initialData): base(initialData)
         {
             
         }

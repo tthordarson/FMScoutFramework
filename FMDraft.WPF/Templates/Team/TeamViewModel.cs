@@ -201,6 +201,28 @@ namespace FMDraft.WPF.Templates.Team
 
         public ObservableCollection<DraftCardViewModel> DraftCards { get; set; }
 
+        public IEnumerable<Player> SeniorPlayers
+        {
+            get
+            {
+                return GetPlayersForTeamType(TeamType.Senior);
+            }
+        }
+
+        public IEnumerable<Player> YouthPlayers
+        {
+            get
+            {
+                return GetPlayersForTeamType(TeamType.Youth);
+            }
+        }
+
+        private IEnumerable<Player> GetPlayersForTeamType(TeamType type)
+        {
+            return DraftCards.Where(x => x.TeamType == type && x.Player != null)
+                    .Select(x => x.Player);
+        }
+
         public FMDraft.Library.Entities.Team ToData()
         {
             var team = new Library.Entities.Team()
@@ -263,6 +285,12 @@ namespace FMDraft.WPF.Templates.Team
             if (team.DraftCards != null)
             {
                 vm.DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(x => x.ToViewModel(core)));
+                
+                vm.DraftCards.CollectionChanged += (sender, e) =>
+                {
+                    vm.NotifyPropertyChanged("SeniorPlayers");
+                    vm.NotifyPropertyChanged("YouthPlayers");
+                };
             }
 
             return vm;

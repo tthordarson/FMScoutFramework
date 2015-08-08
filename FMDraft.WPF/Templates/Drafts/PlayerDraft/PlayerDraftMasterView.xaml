@@ -12,7 +12,7 @@
             <local:PlayerDraftRoundView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type team:TeamViewModel}">
-            <team:PlayersView />
+            <team:TeamDraftView />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -40,11 +40,13 @@
 
         <Button Grid.Row="0"
                 Grid.Column="2"
+                IsEnabled="{Binding CanDraftPlayer}"
                 Command="{Binding DraftPlayer}">Draft Player</Button>
 
         <Button
             Grid.Row="1"
             Grid.Column="2"
+            IsEnabled="{Binding CanGoToNextPick}"
             Command="{Binding NextPick}">Next Pick</Button>
 
         <Grid Grid.Row="2" Grid.Column="0" Margin="10">
@@ -57,7 +59,17 @@
             <ContentControl Grid.Row="1" Content="{Binding SelectedDraftRound}" />
         </Grid>
 
-        <local:AvailablePlayersView Grid.Row="2" Grid.Column="1" DataContext="{Binding AvailablePlayers}" />
+        <!--<local:AvailablePlayersView Grid.Row="2" Grid.Column="1" DataContext="{Binding AvailablePlayers}" />-->
+        <DataGrid ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding SelectedPlayer}" Grid.Column="1" Grid.Row="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
+                <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
+                <DataGridTextColumn Header="Club" Binding="{Binding Club}" />
+                <DataGridTextColumn Header="Current Ability" Binding="{Binding CurrentAbility}" />
+                <DataGridTextColumn Header="Potential Ability" Binding="{Binding PotentialAbility}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Grid Grid.Row="2" Grid.Column="3" Margin="10">
             <Grid.RowDefinitions>

@@ -60,7 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomElements\BindableMultiSelectDataGrid.cs" />
-    <Compile Include="CustomElements\SortedObservableCollection.cs" />
+    <Compile Include="CustomElements\UpdatableObservableCollection.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Templates\AbstractViewModel.cs" />
@@ -124,8 +124,11 @@
       <DependentUpon>SelectPlayersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\SelectPlayersViewModel.cs" />
-    <Compile Include="Templates\Team\PlayersView.xaml.cs">
-      <DependentUpon>PlayersView.xaml</DependentUpon>
+    <Compile Include="Templates\Team\TeamDraftView.xaml.cs">
+      <DependentUpon>TeamDraftView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Team\TeamTypeDraftView.xaml.cs">
+      <DependentUpon>TeamTypeDraftView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\Team\TeamView.xaml.cs">
       <DependentUpon>TeamView.xaml</DependentUpon>
@@ -203,7 +206,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Templates\Team\PlayersView.xaml">
+    <Page Include="Templates\Team\TeamDraftView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\Team\TeamTypeDraftView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,10 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DataGrid
-            ItemsSource="{Binding DraftCardViewModel}"
+            ItemsSource="{Binding DraftPicks}"
+            CanUserSortColumns="False"
             AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Pick #" Binding="{Binding PickNumber}" />
+                <DataGridTextColumn Header="Pick #" Binding="{Binding PickNumber}" SortDirection="Descending" />
                 <DataGridTextColumn Header="Team" Binding="{Binding Team.Name}" />
                 <DataGridTextColumn Header="Player" Binding="{Binding PlayerNameOrDefault}" />
             </DataGrid.Columns>

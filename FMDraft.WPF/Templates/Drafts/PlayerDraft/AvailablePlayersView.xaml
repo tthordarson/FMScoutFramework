@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid ItemsSource="{Binding}" Grid.Column="0" Grid.Row="1" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
                 <DataGridTextColumn Header="Position" Binding="{Binding Position}" />

@@ -23,7 +23,7 @@ namespace FMDraft.WPF.Templates.Drafts
             this.league = league;
             this.nextPickNumber = 1;
 
-            Teams = new SortedObservableCollection<TeamViewModel>(league.Teams.Select(team => team.ToViewModel(core)));
+            Teams = new UpdatableObservableCollection<TeamViewModel>(league.Teams.Select(team => team.ToViewModel(core)));
 
             NextDraw = new RelayCommand(() =>
             {
@@ -64,6 +64,6 @@ namespace FMDraft.WPF.Templates.Drafts
 
         public RelayCommand NextDraw { get; set; }
 
-        public SortedObservableCollection<TeamViewModel> Teams { get; set; }
+        public UpdatableObservableCollection<TeamViewModel> Teams { get; set; }
     }
 }

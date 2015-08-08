@@ -42,7 +42,13 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                     return element;
                 });
 
-                DraftPicks.AddRange(draftCards.OrderBy(x => x.Round).Select(x => x.ToViewModel(core)));
+                DraftPicks.AddRange(draftCards.OrderBy(x => x.Round).Select(x => 
+                {
+                    var vm = x.ToViewModel(core);
+                    vm.PickNumber = x.Team.DraftOrder;
+
+                    return vm;
+                }));
             }
         }
 
