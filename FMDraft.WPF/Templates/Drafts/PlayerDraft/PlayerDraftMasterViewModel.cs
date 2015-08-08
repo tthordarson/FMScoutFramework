@@ -21,7 +21,14 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 
             Teams = new ObservableCollection<TeamViewModel>();
             DraftRounds = new ObservableCollection<PlayerDraftRoundViewModel>();
+            ViewHeading = "Player Draft";
+
+            Reload(core);
         }
+
+        public RelayCommand DraftPlayer { get; set; }
+
+        public RelayCommand NextPick { get; set; }
 
         public override void Reload(GameCore core)
         {
@@ -44,11 +51,9 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 
             for (int i = 1; i <= numberOfRounds; i++)
             {
-                var draftRound = new PlayerDraftRoundViewModel(core, league)
-                {
-                    
-                };
-                //DraftRounds.Add()
+                var draftRound = new PlayerDraftRoundViewModel(core, league, i);
+
+                DraftRounds.Add(draftRound);
             }
         }
 

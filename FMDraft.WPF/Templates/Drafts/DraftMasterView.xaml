@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FMDraft.WPF.Templates.Drafts"
+             xmlns:players="clr-namespace:FMDraft.WPF.Templates.Drafts.PlayerDraft"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type local:DraftLeagueViewModel}">
             <local:DraftLeagueView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type players:PlayerDraftMasterViewModel }">
+            <players:PlayerDraftMasterView />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>

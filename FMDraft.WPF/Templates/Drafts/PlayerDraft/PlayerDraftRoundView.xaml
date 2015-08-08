@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <DataGrid
+            ItemsSource="{Binding DraftCardViewModel}"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Pick #" Binding="{Binding PickNumber}" />
+                <DataGridTextColumn Header="Team" Binding="{Binding Team.Name}" />
+                <DataGridTextColumn Header="Player" Binding="{Binding PlayerNameOrDefault}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

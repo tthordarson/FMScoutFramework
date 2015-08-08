@@ -15,7 +15,7 @@ namespace FMDraft.Library
         private bool isLoaded;
 
         public GameState GameState { get; set; }
-        public QueryService QueryService { get; }
+        public QueryService QueryService { get; set; }
 
         public Action LoadFailedCallback = () => { };
         public Action LoadCompleteCallback = () => {};

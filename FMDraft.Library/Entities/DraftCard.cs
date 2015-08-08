@@ -20,5 +20,6 @@ namespace FMDraft.Library.Entities
         public int ContractYears { get; set; }
         public int ContractSalary { get; set; }
         public TeamType TeamType { get; set; }
+        public Team Team { get; set; }
     }
 }

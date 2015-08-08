@@ -134,6 +134,11 @@ namespace FMDraft.WPF.Templates.Team
                     return "Human";
                 }
 
+                if (Manager == null)
+                {
+                    return string.Empty;
+                }
+
                 return Manager.Name;
             }
         }

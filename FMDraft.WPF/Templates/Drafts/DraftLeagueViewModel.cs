@@ -18,8 +18,14 @@ namespace FMDraft.WPF.Templates.Drafts
             this.league = league;
 
             var draftLotteryVm = new DraftLotteryViewModel(core, league);
-            var playerDraftVm = new PlayerDraftMasterViewModel(core);
-
+            
+            draftLotteryVm.DraftLotteryComplete += () =>
+            {
+                var playerDraftVm = new PlayerDraftMasterViewModel(core, league);
+                ChildViews.Add(playerDraftVm);
+                NotifyPropertyChanged("ChildViews");
+            };
+            
             ChildViews.Add(draftLotteryVm);
         }
 

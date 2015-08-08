@@ -43,6 +43,8 @@ namespace FMDraft.WPF.Templates.Drafts
             });
         }
 
+        public event Action DraftLotteryComplete = delegate { };
+
         private void UpdateLeague()
         {
             var teams = Teams.Select(team => team.ToData());
@@ -56,6 +58,8 @@ namespace FMDraft.WPF.Templates.Drafts
             leagues.ReplaceElement(oldLeague, league);
 
             core.GameState.Leagues = leagues;
+
+            DraftLotteryComplete();
         }
 
         public RelayCommand NextDraw { get; set; }

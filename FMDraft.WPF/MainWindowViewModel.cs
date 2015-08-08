@@ -181,6 +181,11 @@ namespace FMDraft.WPF
         {
             get
             {
+                if (SelectedTab == null)
+                {
+                    return null;
+                }
+
                 switch(SelectedTab.Name)
                 {
                     case "ConfederationTab":

@@ -16,6 +16,25 @@ namespace FMDraft.WPF.Templates.Drafts
 
         }
 
+        public FMDraft.Library.Entities.Team Team { get; set; }
+
+        public Player Player { get; set; }
+
+        public string PlayerNameOrDefault
+        {
+            get
+            {
+                if (Player == null)
+                {
+                    return string.Empty;
+                }
+
+                return Player.FullName;
+            }
+        }
+
+        public int PickNumber { get; set; }
+
         private int _RoundNumber;
 
         public int RoundNumber
@@ -146,7 +165,8 @@ namespace FMDraft.WPF.Templates.Drafts
                 MinimumAbility = draftCard.MinCurrentAbility,
                 MinimumAge = draftCard.MinAge,
                 WeeklySalary = draftCard.ContractSalary,
-                TeamType = draftCard.TeamType
+                TeamType = draftCard.TeamType,
+                Team = draftCard.Team
             };
         }
 
@@ -159,7 +179,8 @@ namespace FMDraft.WPF.Templates.Drafts
                 Round = viewModel.RoundNumber,
                 MaxCurrentAbility = viewModel.MaximumAbility,
                 MaxAge = viewModel.MaximumAge,
-                TeamType = viewModel.TeamType
+                TeamType = viewModel.TeamType,
+                Team = viewModel.Team
             };
         }
     }

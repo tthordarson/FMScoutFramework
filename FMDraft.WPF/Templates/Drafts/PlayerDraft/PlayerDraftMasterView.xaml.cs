@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FMDraft.WPF.Templates.Drafts.PlayerDraftViewModek
+namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 {
     /// <summary>
     /// Interaction logic for PlayerDraftMasterView.xaml
