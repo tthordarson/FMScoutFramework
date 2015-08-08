@@ -3,16 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:local="clr-namespace:FMDraft.WPF.Templates.Drafts.PlayerDraft"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="SortedDraftPicks" Source="{Binding DraftPicks}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="PickNumber" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
         <DataGrid
-            ItemsSource="{Binding DraftPicks}"
+            ItemsSource="{Binding Source={StaticResource SortedDraftPicks}}"
             CanUserSortColumns="False"
             AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Pick #" Binding="{Binding PickNumber}" SortDirection="Descending" />
+                <DataGridTextColumn Header="Pick #" Binding="{Binding PickNumber}" />
                 <DataGridTextColumn Header="Team" Binding="{Binding Team.Name}" />
                 <DataGridTextColumn Header="Player" Binding="{Binding PlayerNameOrDefault}" />
             </DataGrid.Columns>

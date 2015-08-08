@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FMDraft.WPF.CustomElements;
 
 namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 {
@@ -18,7 +19,7 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
         {
             RoundNumber = roundNumber;
 
-            DraftPicks = new ObservableCollection<DraftCardViewModel>();
+            DraftPicks = new UpdatableObservableCollection<DraftCardViewModel>();
 
             this.league = league;
 
@@ -64,6 +65,6 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 
         public string RoundHeading { get { return string.Format("Round {0}", RoundNumber); } }
 
-        public ObservableCollection<DraftCardViewModel> DraftPicks { get; set; }
+        public UpdatableObservableCollection<DraftCardViewModel> DraftPicks { get; set; }
     }
 }

@@ -35,7 +35,10 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 var draftedPlayer = draftService.DraftPlayer(CurrentPick.Team, AvailablePlayers);
                 AvailablePlayers.Remove(draftedPlayer);
                 CurrentPick.Player = draftedPlayer;
+                SelectedDraftRound.DraftPicks.UpdateCollection();
+                NotifyPropertyChanged("CanDraftPlayer");
                 NotifyPropertyChanged("CanGoToNextPick");
+                NotifyPropertyChanged("DraftPanel");
             });
 
             Reload(core);
@@ -70,7 +73,9 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 CurrentPick = nextPick;
             }
 
+            NotifyPropertyChanged("DraftPanel");
             NotifyPropertyChanged("CanDraftPlayer");
+            NotifyPropertyChanged("CanGoToNextPick");
         }
 
         private DraftCardViewModel GetNextPick()
@@ -91,7 +96,7 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 return null;
             }
 
-            return currentRound.DraftPicks.ElementAtOrDefault(nextPickNumber - 1);
+            return currentRound.DraftPicks.OrderBy(x => x.PickNumber).ElementAtOrDefault(nextPickNumber - 1);
         }
 
         public RelayCommand DraftPlayer { get; set; }
@@ -104,14 +109,13 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 {
                     return false;
                 }
-
-                if (CurrentPick.Team.ManagerMode == ManagerMode.CPU)
+                else if (CurrentPick.Team.ManagerMode == ManagerMode.CPU && CurrentPick.Player == null)
                 {
                     return true;
                 }
                 else
                 {
-                    return SelectedPlayer != null;
+                    return SelectedPlayer != null && CurrentPick.Player != null;
                 }
             }
         }

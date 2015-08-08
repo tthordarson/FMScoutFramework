@@ -15,6 +15,11 @@ namespace FMDraft.WPF.CustomElements
             
         }
 
+        public UpdatableObservableCollection() :base()
+        {
+
+        }
+
         public void UpdateCollection()
         {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
