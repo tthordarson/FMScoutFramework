@@ -19,6 +19,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
         public GenerateRandomTeamsViewModel(GameCore core) : base(core)
         {
             NumberOfTeams = 20;
+            Reputation = 9000;
+            StadiumAttendances = 90000;
 
             generateDraftCardVm = new GenerateDraftCardViewModel(core);
             citySourcesVm = new CitySourcesViewModel(core, NumberOfTeams);
@@ -48,6 +50,30 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
             }
         }
 
+        private int _Reputation;
+
+        public int Reputation
+        {
+            get { return _Reputation; }
+            set
+            {
+                _Reputation = value;
+                NotifyPropertyChanged("Reputation");
+            }
+        }
+
+        private int _StadiumAttendances;
+
+        public int StadiumAttendances
+        {
+            get { return _StadiumAttendances; }
+            set
+            {
+                _StadiumAttendances = value;
+                NotifyPropertyChanged("StadiumAttendances");
+            }
+        }
+
         public RelayCommand EditDraftCards { get; private set; }
 
         public RelayCommand EditCitySources { get; private set; }
@@ -70,7 +96,15 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
                 for (int i = 0; i < count; i++)
                 {
-                    teams.Add(RandomService.GetTeam(city, GetDraftCards()));
+                    var team = RandomService.GetTeam(city, GetDraftCards());
+                    team.Reputation = Reputation;
+                    team.Stadium = new Stadium()
+                    {
+                        Attendances = StadiumAttendances,
+                        Name = string.Format("{0} Stadium", team.Name)
+                    };
+
+                    teams.Add(team);
                 }
             });
 

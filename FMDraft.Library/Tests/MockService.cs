@@ -81,6 +81,20 @@ namespace FMDraft.Library.Tests
             return this.nations.Select(x => { return new Nation() { Name = x }; }).OrderBy(x => x.Name);
         }
 
+        public IEnumerable<City> GetCities()
+        {
+            var cityStrings = nationCity.Contents.Select(x => x.Item2);
+
+            return cityStrings.Select(x =>
+            {
+                return new City()
+                {
+                    Name = x
+                };
+            })
+            .OrderBy(x => x.Name);
+        }
+
         public IEnumerable<City> GetCities(Nation nation)
         {
             var cityStrings = nationCity.Contents.Where(x => x.Item1 == nation.Name).Select(x => x.Item2);

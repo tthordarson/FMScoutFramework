@@ -37,6 +37,9 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -83,6 +86,15 @@
                             <Button Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding ToggleEditManager}">OK</Button>
                         </Grid>
                     </Popup>
+                    
+                    <Label Grid.Row="5" Grid.Column="0">Reputation</Label>
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Reputation}" />
+                    
+                    <Label Grid.Row="6" Grid.Column="0">Stadium Name</Label>
+                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding StadiumName}" />
+                    
+                    <Label Grid.Row="7" Grid.Column="0">Stadium Capacity</Label>
+                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding StadiumAttendances}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Draft Cards">

@@ -22,9 +22,7 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
             SearchAndAddCity = new RelayCommand(() =>
             {
-                var nation = core.GameState.PrincipalNation;
-
-                var city = core.QueryService.GetCities(nation).FirstOrDefault(x => !string.IsNullOrEmpty(SearchCityName) && x.Name.Contains(SearchCityName));
+                var city = core.QueryService.GetCities().FirstOrDefault(x => !string.IsNullOrEmpty(SearchCityName) && x.Name.Contains(SearchCityName));
 
                 if (city != null)
                 {

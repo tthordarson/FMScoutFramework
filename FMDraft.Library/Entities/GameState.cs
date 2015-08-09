@@ -9,7 +9,6 @@ namespace FMDraft.Library.Entities
 {
     public class GameState
     {
-        public Nation PrincipalNation { get; set; }
         public IEnumerable<League> Leagues { get; set; }
         public DraftPool DraftPool { get; set; }
 

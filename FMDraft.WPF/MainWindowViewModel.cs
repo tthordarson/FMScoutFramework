@@ -14,7 +14,6 @@ namespace FMDraft.WPF
 {
     public class MainWindowViewModel : AbstractViewModel
     {
-        private ConfederationViewModel confederationViewModel;
         private DraftPoolViewModel draftPoolViewModel;
         private LeagueSetupMasterViewModel leagueSetupViewModel;
         private DraftMasterViewModel goToDraftViewModel;
@@ -27,11 +26,6 @@ namespace FMDraft.WPF
             this.core = new GameCore();
 
             InitializeViewModels();
-
-            confederationViewModel.PrincipalNationChanged += () =>
-            {
-                NotifyPropertyChanged("CanViewLeagueSetup");
-            };
 
             leagueSetupViewModel.Changed += () =>
             {
@@ -99,7 +93,6 @@ namespace FMDraft.WPF
 
         private void NotifyAll()
         {
-            NotifyPropertyChanged("CanViewLeagueSetup");
             NotifyPropertyChanged("SelectedTab");
             NotifyPropertyChanged("CurrentViewModel");
             NotifyPropertyChanged("IsDraftReady");
@@ -107,7 +100,6 @@ namespace FMDraft.WPF
 
         private void InitializeViewModels()
         {
-            confederationViewModel = new ConfederationViewModel(core);
             draftPoolViewModel = new DraftPoolViewModel(core);
             leagueSetupViewModel = new LeagueSetupMasterViewModel(core);
             goToDraftViewModel = new DraftMasterViewModel(core);
@@ -131,14 +123,6 @@ namespace FMDraft.WPF
             {
                 _IsGameLoaded = value;
                 NotifyPropertyChanged("IsGameLoaded");
-            }
-        }
-
-        public bool CanViewLeagueSetup
-        {
-            get
-            {
-                return this.core.GameState != null && this.core.GameState.PrincipalNation != null;
             }
         }
 
@@ -188,9 +172,6 @@ namespace FMDraft.WPF
 
                 switch(SelectedTab.Name)
                 {
-                    case "ConfederationTab":
-                        confederationViewModel.Reload(this.core);
-                        return confederationViewModel;
                     case "LeagueSetupTab":
                         leagueSetupViewModel.Reload(this.core);
                         return leagueSetupViewModel;

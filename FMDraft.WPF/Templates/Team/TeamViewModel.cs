@@ -51,6 +51,48 @@ namespace FMDraft.WPF.Templates.Team
             }
         }
 
+        private int _Reputation;
+
+        public int Reputation
+        {
+            get { return _Reputation; }
+            set 
+            {
+                _Reputation = value;
+                NotifyPropertyChanged("Reputation");
+                Changed();
+            }
+        }
+        
+
+        private string _StadiumName;
+
+        public string StadiumName
+        {
+            get { return _StadiumName; }
+            set 
+            {
+                _StadiumName = value;
+                NotifyPropertyChanged("StadiumName");
+                Changed();
+            }
+        }
+
+        private int _StadiumAttendances;
+
+        public int StadiumAttendances
+        {
+            get { return _StadiumAttendances; }
+            set
+            {
+                _StadiumAttendances = value;
+                NotifyPropertyChanged("StadiumAttendances");
+                Changed();
+            }
+        }
+        
+        
+
         private string _ForegroundColor;
 
         public string ForegroundColor
@@ -245,7 +287,12 @@ namespace FMDraft.WPF.Templates.Team
                 ForegroundColor = ForegroundColor,
                 DraftOrder = DraftOrder,
                 City = City,
-                DraftCards = DraftCards.Select(x => x.ToData())
+                DraftCards = DraftCards.Select(x => x.ToData()),
+                Stadium = new Stadium()
+                {
+                    Attendances = StadiumAttendances,
+                    Name = StadiumName
+                }
             };
 
             if (HumanControlled)
@@ -283,6 +330,12 @@ namespace FMDraft.WPF.Templates.Team
                 DraftOrder = team.DraftOrder,
                 Manager = new ManagerViewModel(core)
             };
+
+            if (team.Stadium != null)
+            {
+                vm.StadiumAttendances = team.Stadium.Attendances;
+                vm.StadiumName = team.Stadium.Name;
+            }
 
             if (team.ManagerMode == ManagerMode.CPU && team.Manager != null)
             {

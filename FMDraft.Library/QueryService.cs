@@ -54,6 +54,11 @@ namespace FMDraft.Library
             return mockService.GetCities(nation);
         }
 
+        public IEnumerable<City> GetCities()
+        {
+            return mockService.GetCities();
+        }
+
         public IEnumerable<Player> GetPlayers(Func<Player, bool> filter = null, bool passive = true)
         {
             var players = core.Players

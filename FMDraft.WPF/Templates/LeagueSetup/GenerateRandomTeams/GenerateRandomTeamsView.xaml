@@ -26,7 +26,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <!--<RowDefinition Height="*" />-->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -46,6 +49,12 @@
             <Label Grid.Row="4"  Grid.Column="0">Draft Cards</Label>
             <Button Grid.Row="4" Grid.Column="1" Command="{Binding EditDraftCards}">Edit</Button>
 
+            <Label Grid.Row="5" Grid.Column="0">Reputation</Label>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Reputation}" />
+            
+            <Label Grid.Row="6" Grid.Column="0">Stadium Capacity</Label>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding StadiumAttendances}" />
+            
         </Grid>
         <Grid Grid.Column="1">
             <ContentControl Content="{Binding RightSideViewModel}" />

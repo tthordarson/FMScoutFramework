@@ -23,7 +23,7 @@ namespace FMDraft.WPF.Templates.Drafts
             {
                 var draftedPlayers = core.GameState.Leagues.SelectMany(l => l.Teams.SelectMany(t => t.DraftCards.Select(d => d.Player)));
 
-                var playerDraftVm = new PlayerDraftMasterViewModel(core, league, player => !draftedPlayers.Contains(player));
+                var playerDraftVm = new PlayerDraftMasterViewModel(core, league, player => !draftedPlayers.Any(draftedPlayer => draftedPlayer.ID == player.ID));
                 ChildViews.Add(playerDraftVm);
                 NotifyPropertyChanged("ChildViews");
             };

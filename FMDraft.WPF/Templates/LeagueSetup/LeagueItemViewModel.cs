@@ -16,11 +16,13 @@ namespace FMDraft.WPF.Templates.LeagueSetup
 {
     public class LeagueItemViewModel : AbstractViewModel
     {
-        public LeagueItemViewModel(GameCore core) : base(core)
+        public LeagueItemViewModel(GameCore core)
+            : base(core)
         {
             Cities = new ObservableCollection<City>();
             TeamViewModels = new ObservableCollection<TeamViewModel>();
             GenerateRandomTeamsViewModel = new GenerateRandomTeamsViewModel(core);
+            Reputation = 200;
 
             GenerateRandomTeamsTogglePopup = new RelayCommand(() =>
             {
@@ -32,17 +34,18 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                 var teams = GenerateRandomTeamsViewModel.GenerateTeams();
 
                 TeamViewModels.Clear();
-                TeamViewModels.AddRange(teams.Select(team =>
-                {
-                    return new TeamViewModel(core)
-                    {
-                        Name = team.Name,
-                        City = team.City,
-                        BackgroundColor = team.BackgroundColor,
-                        ForegroundColor = team.ForegroundColor,
-                        DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(draftCard => draftCard.ToViewModel(core) ))
-                    };
-                }));
+                TeamViewModels.AddRange(teams.Select(team => team.ToViewModel(core)));
+                //TeamViewModels.AddRange(teams.Select(team =>
+                //{
+                //    return new TeamViewModel(core)
+                //    {
+                //        Name = team.Name,
+                //        City = team.City,
+                //        BackgroundColor = team.BackgroundColor,
+                //        ForegroundColor = team.ForegroundColor,
+                //        DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(draftCard => draftCard.ToViewModel(core)))
+                //    };
+                //}));
 
                 TeamViewModels.ForEach(vm => vm.Changed += Changed);
 
@@ -50,6 +53,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                 NotifyPropertyChanged("GenerateRandomTeamsButtonVisibility");
                 TogglePopup();
             });
+
+            Reload(core);
         }
 
         private void TogglePopup()
@@ -63,10 +68,13 @@ namespace FMDraft.WPF.Templates.LeagueSetup
         {
             base.Reload(core);
 
-            var nation = core.GameState.PrincipalNation;
+            if (IsLoaded)
+            {
+                AllNations = new ObservableCollection<Nation>(core.QueryService.GetNations());
+            }
 
             Cities.Clear();
-            Cities.AddRange(core.QueryService.GetCities(nation));
+            Cities.AddRange(core.QueryService.GetCities());
         }
 
         public event Action Changed = delegate { };
@@ -166,6 +174,33 @@ namespace FMDraft.WPF.Templates.LeagueSetup
                 NotifyPropertyChanged("SelectedTeamViewModel");
             }
         }
+
+        private Nation _PrincipalNation;
+
+        public Nation PrincipalNation
+        {
+            get { return _PrincipalNation; }
+            set
+            {
+                _PrincipalNation = value;
+                NotifyPropertyChanged("PrincipalNation");
+            }
+        }
+
+        private int _Reputation;
+
+        public int Reputation
+        {
+            get { return _Reputation; }
+            set 
+            { 
+                _Reputation = value;
+                NotifyPropertyChanged("Reputation");
+            }
+        }
+        
+
+        public ObservableCollection<Nation> AllNations { get; set; }
 
         public League ToData()
         {

@@ -20,6 +20,8 @@ namespace FMDraft.Library.Entities
         public Manager Manager { get; set; }
         public ManagerMode ManagerMode { get; set; }
 
+        public Stadium Stadium { get; set; }
+
         public int DraftOrder { get; set; }
 
         public Team()

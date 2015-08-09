@@ -9,6 +9,8 @@ namespace FMDraft.Library.Entities
     public class League
     {
         public string Name { get; set; }
+        public Nation PrincipalNation { get; set; }
+        public int Reputation { get; set; }
         public IEnumerable<Team> Teams { get; set; }
 
         public League()
