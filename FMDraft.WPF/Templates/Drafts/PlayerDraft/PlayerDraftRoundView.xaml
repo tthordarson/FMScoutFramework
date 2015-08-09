@@ -23,6 +23,8 @@
                 <DataGridTextColumn Header="Pick #" Binding="{Binding PickNumber}" />
                 <DataGridTextColumn Header="Team" Binding="{Binding Team.Name}" />
                 <DataGridTextColumn Header="Player" Binding="{Binding PlayerNameOrDefault}" />
+                <DataGridTextColumn Header="Salary" Binding="{Binding WeeklySalaryString}" />
+                <DataGridTextColumn Header="Years" Binding="{Binding ContractLength}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

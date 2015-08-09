@@ -18,27 +18,39 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
         private League league;
         private IDraftService draftService;
 
-        public PlayerDraftMasterViewModel(GameCore core, League league) : base(core)
+        public PlayerDraftMasterViewModel(GameCore core, League league, Func<Player, bool> playerFilter = null) : base(core)
         {
             this.league = league;
             this.draftService = new NaiveDraftService();
 
             Teams = new ObservableCollection<TeamViewModel>();
             DraftRounds = new UpdatableObservableCollection<PlayerDraftRoundViewModel>(new List<PlayerDraftRoundViewModel>());
-            AvailablePlayers = new ObservableCollection<Player>(core.GameState.DraftPool.AvailablePlayers);
+
+            IEnumerable<Player> availablePlayers = core.GameState.DraftPool.AvailablePlayers;
+
+            if (playerFilter != null)
+            {
+                availablePlayers = availablePlayers.Where(playerFilter);
+            }
+
+            AvailablePlayers = new ObservableCollection<Player>(availablePlayers);
             ViewHeading = "Player Draft";
 
             NextPick = new RelayCommand(ProcessNextPick);
-
-            DraftPlayer = new RelayCommand(() =>
+            DraftPlayer = new RelayCommand(ProcessDraftPick);
+            AutomatePicks = new RelayCommand(() =>
             {
-                var draftedPlayer = draftService.DraftPlayer(CurrentPick.Team, AvailablePlayers);
-                AvailablePlayers.Remove(draftedPlayer);
-                CurrentPick.Player = draftedPlayer;
-                SelectedDraftRound.DraftPicks.UpdateCollection();
-                NotifyPropertyChanged("CanDraftPlayer");
-                NotifyPropertyChanged("CanGoToNextPick");
-                NotifyPropertyChanged("DraftPanel");
+                while (CanDraftPlayer || CanGoToNextPick)
+                {
+                    if (CanDraftPlayer)
+                    {
+                        ProcessDraftPick();
+                    }
+                    if (CanGoToNextPick)
+                    {
+                        ProcessNextPick();
+                    }
+                }
             });
 
             Reload(core);
@@ -46,6 +58,8 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
             ProcessNextPick();
             SelectHumanTeamIfSingle();
         }
+
+        public bool IsDone { get; set; }
 
         private void SelectHumanTeamIfSingle()
         {
@@ -55,6 +69,29 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
             {
                 SelectedTeam = humanTeam;
             }
+        }
+
+        private void ProcessDraftPick()
+        {
+            Player draftedPlayer = null;
+
+            if (CurrentPick.Team.ManagerMode == ManagerMode.CPU)
+            {
+                draftedPlayer = draftService.DraftPlayer(CurrentPick.Team, AvailablePlayers.Where(player => CurrentPick.DraftCard.CanDraftPlayer(player)));
+            }
+            else
+            {
+                draftedPlayer = SelectedPlayer;
+            }
+
+            AvailablePlayers.Remove(draftedPlayer);
+            CurrentPick.Player = draftedPlayer;
+            SelectedDraftRound.DraftPicks.UpdateCollection();
+            NotifyPropertyChanged("CanDraftPlayer");
+            NotifyPropertyChanged("CanGoToNextPick");
+            NotifyPropertyChanged("DraftPanel");
+
+            SelectedPlayer = null;
         }
 
         private void ProcessNextPick()
@@ -93,6 +130,7 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 
             if (currentRound == null)
             {
+                IsDone = true;
                 return null;
             }
 
@@ -115,7 +153,7 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 }
                 else
                 {
-                    return SelectedPlayer != null && CurrentPick.Player != null;
+                    return SelectedPlayer != null && CurrentPick.Player == null && CurrentPick.DraftCard.CanDraftPlayer(SelectedPlayer);
                 }
             }
         }
@@ -126,6 +164,11 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
         {
             get
             {
+                if (IsDone)
+                {
+                    return false;
+                }
+
                 if (CurrentPick == null)
                 {
                     return true;
@@ -134,6 +177,8 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 return CurrentPick.Player != null;
             }
         }
+
+        public RelayCommand AutomatePicks { get; set; }
 
         public override void Reload(GameCore core)
         {
@@ -224,6 +269,7 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
                 _SelectedPlayer = value;
                 NotifyPropertyChanged("SelectedPlayer");
                 NotifyPropertyChanged("CanGoToNextPick");
+                NotifyPropertyChanged("CanDraftPlayer");
             }
         }
         
@@ -236,8 +282,27 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
             set
             {
                 _SelectedTeam = value;
+
+                var updatedDraftCards = GetUpdatedDraftCards(value);
+
+                if (updatedDraftCards != null)
+                {
+                    _SelectedTeam.DraftCards.Clear();
+                    _SelectedTeam.DraftCards.AddRange(GetUpdatedDraftCards(value));
+                }
+
                 NotifyPropertyChanged("SelectedTeam");
             }
+        }
+
+        private IEnumerable<DraftCardViewModel> GetUpdatedDraftCards(TeamViewModel teamVm)
+        {
+            if (CurrentPick == null)
+            {
+                return null;
+            }
+
+            return DraftRounds.Where(round => round.RoundNumber < CurrentPick.RoundNumber).Select(round => round.DraftPicks.Where(pick => pick.Player != null).SingleOrDefault(x => x.PickNumber == teamVm.DraftOrder));
         }
 
         private PlayerDraftRoundViewModel _SelectedDraftRound;
@@ -261,7 +326,16 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
             {
                 _CurrentPick = value;
 
-                SelectedDraftRound = DraftRounds.ElementAt(CurrentPick.RoundNumber - 1);
+                if (value != null)
+                {
+                    SelectedDraftRound = DraftRounds.ElementAt(CurrentPick.RoundNumber - 1);
+                    SelectedTeam = Teams.FirstOrDefault(x => x.Name == CurrentPick.Team.Name);
+                }
+                else
+                {
+                    NotifyPropertyChanged("CanDraftPlayer");
+                    NotifyPropertyChanged("CanGoToNextPick");
+                }
 
                 NotifyPropertyChanged("CurrentPick");
                 NotifyPropertyChanged("SelectedDraftRound");

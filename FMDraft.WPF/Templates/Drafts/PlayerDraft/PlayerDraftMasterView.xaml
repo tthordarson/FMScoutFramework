@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,7 +32,7 @@
             Grid.Row="0" 
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Content="{Binding DraftPanel}"
             Foreground="{Binding DraftPanelForegroundColor}"
             Background="{Binding DraftPanelBackgroundColor}"
@@ -48,8 +49,13 @@
             Grid.Column="2"
             IsEnabled="{Binding CanGoToNextPick}"
             Command="{Binding NextPick}">Next Pick</Button>
+        
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Command="{Binding AutomatePicks}">Automate picks until next human pick</Button>
 
-        <Grid Grid.Row="2" Grid.Column="0" Margin="10">
+        <Grid Grid.Row="3" Grid.Column="0" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -60,7 +66,7 @@
         </Grid>
 
         <!--<local:AvailablePlayersView Grid.Row="2" Grid.Column="1" DataContext="{Binding AvailablePlayers}" />-->
-        <DataGrid ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding SelectedPlayer}" Grid.Column="1" Grid.Row="2" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding SelectedPlayer}" Grid.Column="1" Grid.Row="3" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
                 <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
@@ -71,7 +77,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="2" Grid.Column="3" Margin="10">
+        <Grid Grid.Row="3" Grid.Column="3" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />

@@ -21,7 +21,9 @@ namespace FMDraft.WPF.Templates.Drafts
             
             draftLotteryVm.DraftLotteryComplete += () =>
             {
-                var playerDraftVm = new PlayerDraftMasterViewModel(core, league);
+                var draftedPlayers = core.GameState.Leagues.SelectMany(l => l.Teams.SelectMany(t => t.DraftCards.Select(d => d.Player)));
+
+                var playerDraftVm = new PlayerDraftMasterViewModel(core, league, player => !draftedPlayers.Contains(player));
                 ChildViews.Add(playerDraftVm);
                 NotifyPropertyChanged("ChildViews");
             };

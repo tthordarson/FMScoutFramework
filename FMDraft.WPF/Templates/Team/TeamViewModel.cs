@@ -129,17 +129,30 @@ namespace FMDraft.WPF.Templates.Team
         {
             get
             {
+                string managerName;
+
                 if (HumanControlled)
                 {
-                    return "Human";
+                    managerName = "Human";
                 }
-
-                if (Manager == null)
+                else if(Manager != null)
                 {
-                    return string.Empty;
+                    managerName = Manager.Name;
+                }
+                else
+                {
+                    managerName = string.Empty;
                 }
 
-                return Manager.Name;
+                return managerName;
+            }
+        }
+
+        public string ManagerLabel
+        {
+            get
+            {
+                return string.Format("Manager: {0}", ManagerNameOrDefault);
             }
         }
 

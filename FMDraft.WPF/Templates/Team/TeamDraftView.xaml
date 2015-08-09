@@ -9,9 +9,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="{Binding ManagerText}" />
+        <Label Grid.Row="0" Content="{Binding ManagerLabel}" />
+        <Label Grid.Row="1" FontWeight="Bold">Senior Team</Label>
+        <local:TeamTypeDraftView Grid.Row="2" DataContext="{Binding SeniorPlayers}" />
+        <Label Grid.Row="3" FontWeight="Bold">Youth Team</Label>
+        <local:TeamTypeDraftView Grid.Row="4" DataContext="{Binding YouthPlayers}" />
     </Grid>
 </UserControl>

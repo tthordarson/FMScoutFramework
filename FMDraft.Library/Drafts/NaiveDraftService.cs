@@ -10,6 +10,11 @@ namespace FMDraft.Library.Drafts
     {
         public Player DraftPlayer(Entities.Team team, IEnumerable<Player> availablePlayers)
         {
+            if (availablePlayers == null)
+            {
+                return null;
+            }
+
             var maxAbility = availablePlayers.Max(x => x.CurrentAbility);
 
             return availablePlayers.FirstOrDefault(x => x.CurrentAbility == maxAbility);

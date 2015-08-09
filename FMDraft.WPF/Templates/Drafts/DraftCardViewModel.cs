@@ -20,6 +20,8 @@ namespace FMDraft.WPF.Templates.Drafts
 
         public Player Player { get; set; }
 
+        public DraftCard DraftCard { get; set; }
+
         public string PlayerNameOrDefault
         {
             get
@@ -166,7 +168,8 @@ namespace FMDraft.WPF.Templates.Drafts
                 MinimumAge = draftCard.MinAge,
                 WeeklySalary = draftCard.ContractSalary,
                 TeamType = draftCard.TeamType,
-                Team = draftCard.Team
+                Team = draftCard.Team,
+                DraftCard = draftCard
             };
         }
 

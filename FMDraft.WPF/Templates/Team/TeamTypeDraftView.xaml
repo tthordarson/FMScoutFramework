@@ -6,7 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding FullName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -47,6 +52,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" />
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
     </Grid>
 </UserControl>

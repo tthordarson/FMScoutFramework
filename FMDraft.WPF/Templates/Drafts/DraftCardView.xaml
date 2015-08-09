@@ -19,26 +19,29 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding RoundNumberString}"></Label>
 
         <Label Grid.Row="1" Grid.Column="0">Weekly Salary</Label>
-        <Label Grid.Row="1" Grid.Column="1" Content="{Binding WeeklySalaryString}"></Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding WeeklySalary}"></TextBox>
 
         <Label Grid.Row="2" Grid.Column="0">Contract Length</Label>
-        <Label Grid.Row="2" Grid.Column="1" Content="{Binding ContractLength}"></Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ContractLength}"></TextBox>
 
         <Label Grid.Row="3" Grid.Column="0">Minimum Ability</Label>
-        <Label Grid.Row="3" Grid.Column="1" Content="{Binding MinimumAbility}"></Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MinimumAbility}"></TextBox>
 
         <Label Grid.Row="4" Grid.Column="0">Maximum Ability</Label>
-        <Label Grid.Row="4" Grid.Column="1" Content="{Binding MaximumAbility}"></Label>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MaximumAbility}"></TextBox>
 
         <Label Grid.Row="5" Grid.Column="0">Minimum Age</Label>
-        <Label Grid.Row="5" Grid.Column="1" Content="{Binding MinimumAge}"></Label>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding MinimumAge}"></TextBox>
 
         <Label Grid.Row="6" Grid.Column="0">Maximum Age</Label>
-        <Label Grid.Row="6" Grid.Column="1" Content="{Binding MaximumAge}"></Label>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding MaximumAge}"></TextBox>
+        
+        <!--<Button Grid.Row="7" Grid.ColumnSpan="2" Command="{Binding Delete}">Delete</Button>-->
     </Grid>
 </UserControl>
