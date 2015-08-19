@@ -42,6 +42,46 @@ namespace FMScoutFramework.Core.Entities.InGame
 				return PropertyInvoker.Get<Int32>(StaffOffsets.RowID, OriginalBytes, StaffAddress, DatabaseMode);
 			}
 		}
+
+        public short CurrentAbility
+        {
+            get
+            {
+                return PropertyInvoker.Get<short>(StaffOffsets.CurrentAbility, OriginalBytes, MemoryAddress, DatabaseMode);
+            }
+        }
+
+        public short PotentialAbility
+        {
+            get
+            {
+                return PropertyInvoker.Get<short>(StaffOffsets.PotentialAbility, OriginalBytes, MemoryAddress, DatabaseMode);
+            }
+        }
+
+        public short HomeReputation
+        {
+            get
+            {
+                return PropertyInvoker.Get<short>(StaffOffsets.HomeReputation, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+        }
+
+        public short CurrentReputation
+        {
+            get
+            {
+                return PropertyInvoker.Get<short>(StaffOffsets.CurrentReputation, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+        }
+
+        public short WorldReputation
+        {
+            get
+            {
+                return PropertyInvoker.Get<short>(StaffOffsets.WorldReputation, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+        }
 	}
 }
 
