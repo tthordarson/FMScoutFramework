@@ -46,6 +46,7 @@ namespace UnitTests
         [TestMethod]
         public void StaffFirstName()
         {
+            firstName.ToFmStringHex();
             Assert.AreEqual(firstName, TestStaff.Firstname);
         }
 
