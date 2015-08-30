@@ -9,5 +9,6 @@ namespace FMDraft.Library.Entities
     public class City
     {
         public string Name { get; set; }
+        public Nation Nation { get; set; }
     }
 }

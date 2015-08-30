@@ -22,7 +22,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
 
             SearchAndAddCity = new RelayCommand(() =>
             {
-                var city = core.QueryService.GetCities().FirstOrDefault(x => !string.IsNullOrEmpty(SearchCityName) && x.Name.Contains(SearchCityName));
+                var city = core.QueryService.GetCity(SearchCityName, SearchNation);
+                //var city = core.QueryService.GetCities().FirstOrDefault(x => !string.IsNullOrEmpty(SearchCityName) && x.Name.Contains(SearchCityName));
 
                 if (city != null)
                 {
@@ -36,6 +37,8 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
                     NotifyPropertyChanged("TeamCountValidatorTextColor");
                 }
             });
+
+            AllNations = new ObservableCollection<Nation>(core.QueryService.GetNations());
         }
 
         public RelayCommand SearchAndAddCity { get; set; }
@@ -54,17 +57,19 @@ namespace FMDraft.WPF.Templates.LeagueSetup.GenerateRandomTeams
             }
         }
 
-        private bool _IncludeForeignCity;
+        private Nation _SearchNation;
 
-        public bool IncludeForeignCity
+        public Nation SearchNation
         {
-            get { return _IncludeForeignCity; }
+            get { return _SearchNation; }
             set
             {
-                _IncludeForeignCity = value;
-                NotifyPropertyChanged("IncludeForeignCity");
+                _SearchNation = value;
+                NotifyPropertyChanged("SearchNation");
             }
         }
+
+        public ObservableCollection<Nation> AllNations { get; set; }
 
         public int CalculateTeamCountDifference()
         {

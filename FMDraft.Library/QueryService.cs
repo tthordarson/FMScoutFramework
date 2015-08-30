@@ -34,10 +34,25 @@ namespace FMDraft.Library
             return query;
         }
 
+        public City GetCity(string searchCityName, Nation searchNation)
+        {
+            var raw = core.Cities.FirstOrDefault(x => x.Nation.Name == searchNation.Name
+                 && x.Name.Contains(searchCityName));
+
+            if (raw == null)
+            {
+                return null;
+            }
+
+            return new City()
+            {
+                Name = raw.Name,
+                Nation = searchNation
+            };
+        }
+
         public IEnumerable<Nation> GetNations()
         {
-            //return mockService.GetNations();
-
             return core.Nations
                 .Select(x =>
                 {

@@ -63,7 +63,7 @@ namespace FMDraft.WPF.Templates.Drafts.PlayerDraft
 
         private void SelectHumanTeamIfSingle()
         {
-            var humanTeam = Teams.SingleOrDefault(x => x.HumanControlled);
+            var humanTeam = Teams.FirstOrDefault(x => x.HumanControlled);
 
             if (humanTeam != null)
             {

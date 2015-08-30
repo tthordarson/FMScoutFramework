@@ -1,0 +1,5 @@
+language: csharp
+sudo: false
+
+script:
+  - xbuild FMScoutFramework.sln /property:"Configuration=Release" /p:"DefineConstants=LINUX"

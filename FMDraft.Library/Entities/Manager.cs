@@ -14,6 +14,7 @@ namespace FMDraft.Library.Entities
 
     public enum ManagerMode
     {
+        NotSelected,
         Player,
         CPU
     }

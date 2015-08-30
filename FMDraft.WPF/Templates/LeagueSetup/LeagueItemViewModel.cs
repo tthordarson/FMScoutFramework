@@ -35,18 +35,6 @@ namespace FMDraft.WPF.Templates.LeagueSetup
 
                 TeamViewModels.Clear();
                 TeamViewModels.AddRange(teams.Select(team => team.ToViewModel(core)));
-                //TeamViewModels.AddRange(teams.Select(team =>
-                //{
-                //    return new TeamViewModel(core)
-                //    {
-                //        Name = team.Name,
-                //        City = team.City,
-                //        BackgroundColor = team.BackgroundColor,
-                //        ForegroundColor = team.ForegroundColor,
-                //        DraftCards = new ObservableCollection<DraftCardViewModel>(team.DraftCards.Select(draftCard => draftCard.ToViewModel(core)))
-                //    };
-                //}));
-
                 TeamViewModels.ForEach(vm => vm.Changed += Changed);
 
                 NotifyPropertyChanged("TeamListViewVisibility");
